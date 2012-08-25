@@ -1,0 +1,800 @@
+h1, h2, h3, h4, h5, h6 {
+margin: 0;
+font-family: 'Rokkitt', serif;
+font-weight: bold;
+color: inherit;
+zoom: 150%;
+text-rendering: optimizelegibility;
+}
+
+h2 {
+display: block;
+font-size: 1.5em;
+-webkit-margin-before: 0.83em;
+-webkit-margin-after: 0.83em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
+
+h2 {
+font-size: 24px;
+line-height: 28px;
+}
+
+.grey {
+font-weight: 200;
+}
+.small {
+color: #999;
+}
+
+.information {
+margin-top: 50px;
+}
+
+.top {
+margin-bottom: 30px;
+}
+.center-it {
+text-align: center;
+}
+
+#uofr {
+	color: green;
+}
+
+
+/*Random URegina stuff*/
+
+
+
+
+
+
+
+
+
+@charset "UTF-8";
+
+#skip {
+    position: absolute;
+    left: -9999px;
+}
+
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+h2 {}
+
+/* @group Top Drop Down Menu */
+
+#topNav { 
+    clear: right; 
+    height: 1.0em; 
+    padding-top: 18px; 
+    font-size: 1.2em;
+}
+
+#topNav .dropNav { 
+     
+}
+
+#topNav li { 
+    border-right: 1px solid #231F20; 
+    padding: 0px 10px 0px 10px; 
+}
+
+#topNav li.first { 
+    padding-left: 0; 
+}
+
+#topNav li.last { 
+    border: 0; 
+    padding-right: 0; 
+}
+
+#topNav a { 
+    text-decoration: none; 
+    text-transform: uppercase; 
+    color: #231F20;
+}
+
+#topNav a:hover { 
+    text-decoration: underline; 
+    color: #FDB826 !important; 
+}
+
+#topNav ul ul { 
+    padding: 5px 0px 10px 0;
+    background-color: #545454;
+}
+
+#topNav ul ul li {
+    border: 0;
+    float: left;
+    padding: 0;
+}
+
+#topNav ul ul li:hover {
+    background-color: #a2a2a2;
+}
+
+#topNav ul ul li a { 
+    color: #FFF; 
+    font-size: 0.9em; 
+    text-transform: none;
+    display: block;
+    padding: 6px 16px 6px 6px;
+}
+
+#topNav ul ul li a:hover { 
+    color: #ffffff !important; 
+    text-decoration: none; 
+}
+
+/* @end */
+
+/* @group Home Page Column Elements */
+
+#colContainer { 
+    clear: both; 
+    padding-top: 10px; 
+    min-height: 200px; 
+}
+
+#col_left { 
+    float: left; 
+    clear: left; 
+    width: 155px; 
+    margin-top: 231px; 
+}
+
+#col_right { 
+    float: right; 
+    clear: right; 
+    width: 800px; 
+}
+
+/* @end */
+
+/* @group Banner Elements */
+
+#hp_banner { 
+    width: 800px; 
+    height: 200px; 
+    position: relative; 
+}
+
+#hpSiteTag { 
+    position: relative; 
+    z-index: 500; 
+    top: 30px; 
+    left: -135px; 
+}
+
+#hp_banner a.item { 
+    float: left; 
+    position: absolute; 
+}
+
+#hp_banner a img { 
+    border: none; 
+}
+
+#hp_banner a.show { 
+    z-index: 500; 
+}
+
+
+
+#hp_banner_content {
+    z-index: 501; 
+    width: 780px;
+    position: absolute;
+    bottom: 0;
+    padding: 0 10px 5px 10px;
+    font-size: 0.9em;
+}
+
+#hp_banner_nav { 
+    float: right; 
+    text-align: right; 
+    padding-right: 24px; 
+    margin-top: 5px; 
+    margin-left: 50px;
+}
+#hp_banner_nav img { 
+    margin-left: 4px; 
+    cursor: pointer;
+}
+
+.hp_banner_text { 
+    margin-right: 190px;
+    color: #000;
+    width: 590px;
+}
+.hp_banner_text a { 
+    color: #000; 
+    font-weight: bold;
+    text-decoration: none;
+}
+.hp_banner_text a:hover {
+    text-decoration: underline; 
+}
+
+
+
+
+#hpApplyNow { 
+    position: absolute; 
+    z-index: 500; 
+    right: 18px; 
+    float: right; 
+    clear: right; 
+    margin: 18px 18px 0 0;
+    top: 15px;
+}
+
+#hpURGuarentee { 
+    position: absolute; 
+    z-index: 500; 
+    right: 18px; 
+    top: 80px; 
+    float: right; 
+    clear: right; 
+    margin: 8px 18px 0 0; 
+}
+
+#hpApplyNow a, #hpURGuarentee a { 
+    width: 160px; 
+    height: 42px; 
+    display: block;
+}
+
+#hpApplyNow a { 
+    background: url(../img/hp/bannerFloatButtons2.png) no-repeat scroll 0px -42px; 
+}
+
+#hpApplyNow a:hover { 
+    background: url(../img/hp/bannerFloatButtons2.png) no-repeat scroll -160px -42px; 
+}
+
+#hpURGuarentee a { 
+    background: url(../img/hp/bannerFloatButtons2.png) no-repeat scroll 0px 0px; 
+}
+
+#hpURGuarentee a:hover { 
+    background: url(../img/hp/bannerFloatButtons2.png) no-repeat scroll -160px 0px; 
+}
+
+/* @end */
+
+/* @group Left Side Audience Menu (Yellow) */
+
+div.info { 
+    padding: 61px 0px 5px 0px; 
+    font-weight: bold; 
+    font-size: 0.9em; 
+    color: #231F20; 
+}
+
+#hpAction { 
+    background-color: #ffdc7b; 
+    list-style: none;
+    margin-bottom: 50px;
+}
+
+#hpAction a { 
+    display: block; 
+    padding: 8px; 
+    font-weight: bold; 
+    font-size: 1em; 
+    color: #000; 
+    text-decoration: none; 
+}
+
+#hpAction a:hover {
+    background: #ffc82e;
+    color: #000000 !important;
+}
+
+#hpAudience { 
+    background: #ffc82e; 
+    list-style: none; 
+}
+
+#hpAudience li { 
+    border-bottom: 1px solid #ffdd7f; 
+}
+
+#hpAudience a { 
+    display: block; 
+    padding: 8px; 
+    font-weight: bold; 
+    color: #231F20; 
+    text-decoration: none;
+}
+
+#hpAudience a:hover {
+    background-color: #ffdc7b;
+    color: #333333 !important;
+}
+/* @end */
+
+
+/* @group Social Media Links */
+
+#hpSocialMedia { 
+    list-style: none; 
+    margin-top: 5px; 
+}
+
+#hpSocialMedia li { 
+    display: inline; 
+    margin-right: 4px; 
+}
+
+#hpSocialMedia li.last { 
+    margin-right: 0; 
+}
+
+/* @group SM Directory */
+
+.sm_directory {
+    margin-top: 7px;
+    margin-bottom:7px;
+}
+
+.sm_directory a{
+    display: block;
+    width: 147px;
+    height: 18px;
+    padding-left: 8px;
+    font-weight: bold;
+    background-color: #56A6DB;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1.0em;
+}
+
+.sm_directory a:hover {
+    background-color: #7EBBE4;
+    color: #FFF !important;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Left Side Secondary Audience Menu (Grey) */
+
+#hpSecondaryAudience { 
+    list-style: none; 
+    margin-top: 00px; 
+}
+
+#hpSecondaryAudience li { 
+    background: #CCC; 
+    border-bottom: 1px solid #eaeaea; 
+}
+
+#hpSecondaryAudience a { 
+    text-decoration: none; 
+    font-size: 1em; 
+    font-weight: bold;
+    display: block;
+    padding: 8px; 
+}
+
+#hpSecondaryAudience a:hover { 
+    color: #333 !important;
+    background-color: #dbdbdb;
+}
+
+/* @end */
+
+/* @group Content Area for Dynamic Content */
+
+#hpContentContainer { 
+    padding-top: 10px; 
+    position: relative;
+}
+
+#hpContentContainer h1 { 
+    position: absolute; 
+    left: -10000px; 
+}
+
+#hpContentContainer h2 { 
+    margin-top: 19px; 
+    margin-bottom: 15px; 
+    padding: 0; 
+    font-size: 1.5em;
+    color: #000;
+}
+
+/* @end */
+
+/* @group Events / Notices Listing Box - Original */
+
+#hpEventsColumn, #hpNoticeListing  { 
+    width: 216px; 
+    float: right; 
+}
+
+#hpEventsListing, #hpNoticeListing { 
+    width: 197px; 
+    float: right; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    margin-top: 25px; 
+    background-color: #fafafa; 
+    border: 1px solid #d9d8d8; 
+    border-radius: 3px;
+}
+
+#hpEventsListing ul, #hpNoticeListing ul { 
+    list-style: none; 
+}
+
+#hpEventsListing li, #hpNoticeListing li { 
+    margin-top: 14px; 
+    font-size: 8pt;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+#hpEventsListing p, #hpNoticeListing p {
+    margin-bottom: 2px;
+}
+
+#hpEventsListing li a, #hpNoticeListing li a { 
+    font-weight: bold;
+    color: #515151;
+}
+
+#hpEventsListing a, #hpNoticeListing a { 
+    color: #c34d24; 
+    text-decoration: none; 
+}
+
+#hpEventsListing a:hover, #hpNoticeListing a:hover { 
+    color: black !important; 
+    text-decoration: underline; 
+}
+
+#hpEventsListing h4, #hpEventsListing .title, #hpNoticeListing .title { 
+    font-weight: bold; 
+    font-size: 1.2em; 
+    color: #c34d24;
+    margin-top:0;
+}
+
+.hpEventsListingmorenews { 
+    float: right; 
+    clear: right; 
+    font-weight: bold; 
+    font-size: 1em; 
+    padding-top: 0px; 
+}
+
+#hpNotices { 
+    background-color: #fafafa; 
+    border: 1px solid #d9d8d8; 
+    width: 193px; 
+    float: right; 
+    clear: right; 
+    padding: 10px; 
+    border-radius: 3px; 
+}
+
+#hpNotices ul { 
+    list-style: none; 
+}
+
+#hpNotices li { 
+    margin-top: 8px; 
+}
+
+/* @end */
+
+
+/* @group News Items */
+
+.hpNewsItem { 
+    margin-bottom: 30px; 
+    width: 574px; 
+    line-height: 1.4;
+    float: left;
+}
+
+.hpNewsItem img { 
+    margin-right: 10px; 
+    float: left; 
+    clear: left; 
+}
+
+.hpNewsItem div {
+    float: left;
+    width: 440px;
+    margin-top: -5px;
+}
+
+.hpNewsItem h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: normal;
+    font-size: 1.1em;
+}
+
+.hpNewsItem h3 a {
+    color: #333 !important;
+}
+
+.hpNewsItem p {
+    margin: 0;
+    line-height: 1.5em;
+}
+
+
+.hpNewsItem a { 
+    text-decoration: none;
+    color: #c34d24 !important;
+}
+
+.hpNewsItem a:hover { 
+    color: #823418;
+    text-decoration: underline;
+}
+
+.hpNewsItem .copy { 
+    font-size: 1.0em; 
+}
+
+.hpNewsItem a.readMore { 
+    font-weight: bold; 
+    font-size: 1em; 
+    color: #c34d24;
+}
+
+.hpNewsItem a.readMore:hover { 
+    color: black !important; 
+}
+
+
+#hpNewsItemMore {
+    clear: both;
+    top: -12px;
+}
+
+#hpNewsItemMore a { 
+    font-weight: bold; 
+    font-size: 1em; 
+    color: #c34d24;
+    text-decoration: none;
+    position: relative;
+    left: 470px;
+}
+
+#hpNewsItemMore a:hover { 
+    color: black !important;
+    text-decoration: underline;
+}
+
+/* @end */
+
+/* @group Additions */
+
+/* @group Notice */
+
+#notice {}
+
+#notice div { 
+    width: 980px; 
+    margin: 0 auto; 
+    padding: 10px;
+    background-color: #DE4646; 
+    border-bottom: 5px solid #FFF;
+}
+
+#notice p { 
+    margin-top: 0; 
+    margin-bottom: 0; 
+    color: #FFF; 
+    font-size: 13px; 
+    text-align: left; 
+}
+
+#notice a { 
+    color: #ffffff; 
+    font-weight: bold; 
+    text-decoration: none; 
+}
+
+#notice a:hover { 
+    color: #f5c7c7 !important;
+    text-decoration: underline;
+}
+
+/* @end */
+
+p.event_date {
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 0;
+    color: #000000;
+}
+/* @end */
+
+/* @group Notice Box */
+
+#noticeBox {
+    background-color: #de4646;
+    border: 1px solid #954a4a;
+}
+
+#noticeBox p {
+    color: white;
+}
+
+#noticeBox h1,  #noticeBox a {
+    color: #fdc82f;
+}
+
+/* @end */
+
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.readMore:before {
+    margin: 0 !important;
+}
+
+/* Hides Rotating Banner navigation (No JS) */
+.hideButton {
+    display:    none;
+}
+
+.hideElement {
+    display:    none;
+}
+
+/*
+---> Emergency Replace
+*/
+
+#content {
+    clear: both;
+    background-color: #fafafa;
+    border-top: 1px solid #d9d8d8;
+    border-bottom: 1px solid #d9d8d8;
+}
+#mainContent {
+    float: left;
+    padding-left: 10px;
+    width: 600px;
+    border-right: 1px solid #d9d8d8;
+    padding-right: 13px;
+    padding-bottom: 25px;
+    background-color: #FFF;
+}
+#sidebar {
+    float:left;
+    padding-left: 13px;
+    width: 300px;
+    padding-right: 26px;
+    padding-bottom: 25px;
+}
+#sidebar li  {
+    margin-bottom: 10px;
+}
+#sidebar ul {
+    padding-left: 20px;
+}
+#content .title {
+    padding-bottom: 8px;
+}
+p.meta {
+    font-weight: bold;
+    color: #cd0202;
+    margin-top: -10px;
+}
+
+/*
+---> Hidden Blocks
+*/
+
+div.block-features {
+    width: 574px; 
+    line-height: 1.4;
+}
+
+
+
+
+
+
+
+#hpApplyNow {
+position: absolute;
+z-index: 500;
+right: 18px;
+float: right;
+clear: right;
+margin: 18px 18px 0 0;
+top: 15px;
+}
+
+#hpURGuarentee {
+position: absolute;
+z-index: 500;
+right: 18px;
+top: 80px;
+float: right;
+clear: right;
+margin: 8px 18px 0 0;
+}
+
+#hpURGuarentee a {
+background: url(http://www.uregina.ca/assets/templates/img/hp/bannerFloatButtons2.png) no-repeat scroll 0px 0px;
+}
+
+#hpApplyNow a, #hpURGuarentee a {
+width: 160px;
+height: 42px;
+display: block;
+}
+
+#hpApplyNow a {
+background: url("/assets/startnow.png") no-repeat scroll 0px -42px;
+}
+
+#hpApplyNow a, #hpURGuarentee a {
+width: 160px;
+height: 42px;
+display: block;
+}
+
+#hp_banner {
+width: 800px;
+height: 200px;
+position: relative;
+}
+
+#hp_banner a.item {
+float: left;
+position: absolute;
+}
+#hpURGuarentee {
+position: absolute;
+z-index: 500;
+right: 18px;
+top: 80px;
+float: right;
+clear: right;
+margin: 8px 18px 0 0;
+}
+
+
+#hpApplyNow a:hover { 
+    background: url("/assets/startnow.png") no-repeat scroll -160px -42px; 
+}
+
+
+#hpURGuarentee a:hover { 
+    background: url(http://www.uregina.ca/assets/templates/img/hp/bannerFloatButtons2.png) no-repeat scroll -160px 0px; 
+
+}

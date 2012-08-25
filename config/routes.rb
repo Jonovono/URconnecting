@@ -1,4 +1,26 @@
 Urdating::Application.routes.draw do
+
+  get "home/index"
+
+  get "home/about"
+  get "home/how"
+
+  get "home/contact"
+  get "home/confirmation"
+
+  # devise_for :users
+  
+  match "/send_confirmation" => 'home#send_confirmation'
+
+
+  devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => 'users/confirmations'}
+  # match 'users/:id' => 'users#show', :as => :user
+  resources :users, :only => [:index, :show]
+  
+  resources :user_steps
+  
+  root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

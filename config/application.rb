@@ -14,6 +14,9 @@ module Urdating
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    
+    SMS = Nexmo::Client.new('404e7d57', '721423dd')
+    
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
@@ -41,6 +44,8 @@ module Urdating
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,

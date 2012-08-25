@@ -1,0 +1,33 @@
+<center><h1># Phone Number</h1></center>
+<center><h4>Don't Worry. No one will see your phone number. All texts are sent to our phone number and we just send the message to who we have randomly selected to talk to you.</h4></center>
+
+<br />
+<br />
+
+
+<div class='row'>
+  <div class='span6 offset3'>
+  <%= form_for @user, url: wizard_path do |f| %>
+    <!-- # <%= devise_error_messages! %> -->
+    <%= render 'shared/error_messages' %>
+    <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>
+    <%= f.telephone_field :phone, :placeholder => 'Example: 1306777888' %>
+    
+    <br />
+    <a href='#' id='send-confirmation' class='btn btn-success'>Send confirmation code to cell phone</a>
+    
+    <br />
+    <br />
+    <br />
+    <p>You should get a text message with a five digit code. You are to enter it in the next field so that we know we are able to successfully send messages to your phone</p>
+    
+    <p>If you are not seeing a text message make sure your phone number is correct (should be 10 or 11 numbers). If still not working email me.
+    
+    <%= f.label :user_entered_confirmation, "Enter confirmation code" %>
+    <%= f.text_field :user_entered_confirmation, :placeholder => 'Five digit confirmation code' %>
+
+    <div><%= f.submit "Sign up", class: 'btn btn-large btn-primary' %></div>
+  <% end %>
+
+  </div>
+</diw>

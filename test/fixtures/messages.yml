@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  conversation_id: 1
+  message: MyText
+  user_id: 1
+  sent: 2012-08-24 15:43:10
+
+two:
+  conversation_id: 1
+  message: MyText
+  user_id: 1
+  sent: 2012-08-24 15:43:10
