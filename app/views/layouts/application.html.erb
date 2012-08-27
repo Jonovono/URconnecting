@@ -20,10 +20,10 @@
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Home",    '#' %></li>
-              <li><%= link_to "About",    '#' %></li>
-              <li><%= link_to "Contact",    '#' %></li>
+              <li><%= link_to "About/Contact",    '#' %></li>
               <% if user_signed_in? %>
                 <li><%= link_to "How to Use", home_how_path %></li>
+                <li><%= link_to "Add Info", profile_path %></li>
                 <li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete %></li>
               <% else %>
                 <li><%= link_to "Sign in", '/users/sign_in' %></li>

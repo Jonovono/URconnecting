@@ -1,10 +1,12 @@
 class UserStepsController < ApplicationController
    include Wicked::Wizard
    
-   steps :phone
+   steps :phone, :info
    
    def show
      puts 'wickedddd'
+     puts User.count
+     puts params
      @user = current_user
      puts @user
      render_wizard
@@ -14,8 +16,13 @@ class UserStepsController < ApplicationController
      puts 'updating the user'
      puts params
      @user = current_user
+     puts @user
+     params[:user][:status] = step.to_s
      params[:user][:status] = 'active' if step == steps.last
+     puts params[:user]
      @user.attributes = params[:user]
+     puts 'kkkkwtf'
+     puts @user
      render_wizard @user
    end
    

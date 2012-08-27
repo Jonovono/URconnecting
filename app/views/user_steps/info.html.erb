@@ -1,0 +1,142 @@
+<center><h1>General Information</h1></center>
+<center><p>We'd like to have some basic information about the users. This information will not be used in any way without your permission. You can either enter in the information or login from your Facebook account. We will never show your name. When we pair you up we will only break the ice by informing the other of your gender and other information. </p></center>
+<br />
+<br />
+<% puts "otaehutaoeuhoa" %>
+
+<% puts current_user %>
+<div class='row'>
+  <% if false %>
+  <div class='span4'>
+  <%= simple_form_for @user, url: wizard_path do |f| %>
+    <!-- # <%= devise_error_messages! %> -->
+    <%= render 'shared/error_messages' %>
+    <br />
+    <%= f.input :gender, :collection => [["Male", 0], ["Female", 1]], :as => :radio_buttons %>
+    <%= f.label :year_born, "* Year you were born" %>
+    <%= f.select :year_born,  (1940..Time.now.year).to_a, :include_blank => {:year => "Select a Year"} %>
+    <br />
+    <br />
+
+    <%= f.label :university_year, "Year of University" %>
+    <%= f.select :university_year,  1..10, :include_blank => {:year => "Select a Year"} %>
+
+    <%= f.label :occupation, "I am..." %>
+    <%= f.select :occupation,  [["Undergrad Student", 0], ["Master Student", 1], 
+                                ["PhD Student", 2], ["Faculty/Staff", 3],
+                                ["President Dr. Vianne Timmons", 4], ["Other", 5]], :include_blank => {:year => "Select a Year"}%>
+
+    <%= f.label :studying %>
+    <%= f.select :studying,  [["Accounting"],	
+    ["Actuarial Science"],
+    ["Adapted Movement Science"],
+    ["Anthropology"],
+    ["Art History"],
+    ["Art Studies"],
+    ["Arts and Culture"],
+    ["Arts Education"],
+    ["Baccalauréat en éducation (le Bac)"],
+    ["Biochemistry"],
+    ["Biology"],
+    ["Business"],
+    ["Chemical Technology"],
+    ["Chemistry"],
+    ["Classical and Medieval Studies"],
+    ["Computer Science"],
+    ["Creative Writing"],
+    ["Dance Education"],
+    ["Economics (BA & BSc)"],
+    ["Education"],
+    ["Engineering – Electronic Systems"],
+    ["Engineering – Environmental Systems"],
+    ["Engineering – Industrial Systems"],
+    ["Engineering – Petroleum Systems"],
+    ["Engineering – Software Systems"],
+    ["English"],
+    ["Entrepreneurship"],
+    ["Environmental Biology"],
+    ["Environmental Health & Science"],
+    ["Film & Video Production"],
+    ["Film and Video Studies"],
+    ["Finance"],
+    ["Francophone Studies"],
+    ["French"],
+    ["General Management"],
+    ["Geography"],
+    ["Geology"],
+    ["Health Promotion"],
+    ["Health Studies"],
+    ["History"],	
+    ["Human Justice"],
+    ["Human Kinetics"],
+    ["Human Resource Management"],
+    ["Indian Fine Arts"],
+    ["Indian Languages"],
+    ["Indigenous Education"],
+    ["Indigenous Studies"],
+    ["International Business"],	
+    ["International Languages"],	
+    ["International Studies"],
+    ["Journalism"],
+    ["Justice Studies"],
+    ["Literatures and Linguistics"],
+    ["Marketing"],
+    ["Mathematics"],	
+    ["Medical Imaging"],
+    ["Medical Laboratory Science"],
+    ["Music"],
+    ["Music Education"],
+    ["Nursing"],
+    ["Philosophy"],
+    ["Physics (Applied/Industrial)"],
+    ["Police Studies"],
+    ["Political Science"],
+    ["Pre-Agriculture"],
+    ["Pre-Chiropractic Medicine"],
+    ["Pre-Dentistry"],
+    ["Pre-Law"],
+    ["Pre-Medicine"],
+    ["Pre-Nutrition"],
+    ["Pre-Occupational therapy"],
+    ["Pre-Optometry"],
+    ["Pre-Pharmacy"],
+    ["Pre-Physical Therapy"],
+    ["Pre-Veterinary Medicine"],
+    ["Psychology"],
+    ["Religious Studies"],
+    ["Resource & Environmental Studies"],
+    ["Secondary Education"],
+    ["Social Work"],
+    ["Sociology & Social Studies"],
+    ["Software Systems Development"],
+    ["Sport and Recreation Management"],
+    ["Statistics"],
+    ["Theatre (Acting, Production, Design)"],
+    ["Therapeutic Recreation"],
+    ["Urban History"],
+    ["Visual Arts (Art Studies, Art Studio)"],
+    ["Women's and Gender Studies"]], :include_blank => {:year => "Select a Year"} %>  
+
+    <!-- <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>
+    <%= f.telephone_field :phone, :placeholder => 'Example: 1306777888' %> -->
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+
+    <div><%= f.submit "Finish Registration", class: 'btn btn-large btn-primary' %></div>
+  <% end %>
+
+  </div>
+  <% end %>
+  <!-- <div class='span2'>
+    <h1>OR</h1>
+    </div> -->
+    <div class='span5 offset3'>
+      <h4>Finish Registration by logging into Facebook</h4>
+     <a href="/auth/facebook" id="fb-login"><img src="/assets/facebook_login_button.png" width="500"></a>
+      </div>
+  
+</div>

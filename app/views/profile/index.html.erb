@@ -1,0 +1,112 @@
+<h2>Add some more information</h2>
+
+<h4><%= link_to "Update your phone number here", profile_phone_path %></h4>
+
+<p>Add this information to your profile. It will be sent out at the beginning of the text conversation.</p>
+
+<%= simple_form_for @user, :url => '/profile/update' do |f| %>
+  <!-- # <%= devise_error_messages! %> -->
+  <%= render 'shared/error_messages' %>
+  <br />
+  <%= f.label :university_year, "Year of University" %>
+  <%= f.select :university_year,  1..10, :include_blank => {:year => "Select a Year"} %>
+
+  <%= f.label :occupation, "I am..." %>
+  <%= f.select :occupation,  [["Undergrad Student", 0], ["Master Student", 1], 
+                              ["PhD Student", 2], ["Faculty/Staff", 3],
+                              ["President Dr. Vianne Timmons", 4], ["Other", 5]], :include_blank => {:year => "Select a Year"}%>
+
+  <%= f.label :studying %>
+  <%= f.select :studying,  [["Accounting"],	
+  ["Actuarial Science"],
+  ["Adapted Movement Science"],
+  ["Anthropology"],
+  ["Art History"],
+  ["Art Studies"],
+  ["Arts and Culture"],
+  ["Arts Education"],
+  ["Baccalauréat en éducation (le Bac)"],
+  ["Biochemistry"],
+  ["Biology"],
+  ["Business"],
+  ["Chemical Technology"],
+  ["Chemistry"],
+  ["Classical and Medieval Studies"],
+  ["Computer Science"],
+  ["Creative Writing"],
+  ["Dance Education"],
+  ["Economics (BA & BSc)"],
+  ["Education"],
+  ["Engineering – Electronic Systems"],
+  ["Engineering – Environmental Systems"],
+  ["Engineering – Industrial Systems"],
+  ["Engineering – Petroleum Systems"],
+  ["Engineering – Software Systems"],
+  ["English"],
+  ["Entrepreneurship"],
+  ["Environmental Biology"],
+  ["Environmental Health & Science"],
+  ["Film & Video Production"],
+  ["Film and Video Studies"],
+  ["Finance"],
+  ["Francophone Studies"],
+  ["French"],
+  ["General Management"],
+  ["Geography"],
+  ["Geology"],
+  ["Health Promotion"],
+  ["Health Studies"],
+  ["History"],	
+  ["Human Justice"],
+  ["Human Kinetics"],
+  ["Human Resource Management"],
+  ["Indian Fine Arts"],
+  ["Indian Languages"],
+  ["Indigenous Education"],
+  ["Indigenous Studies"],
+  ["International Business"],	
+  ["International Languages"],	
+  ["International Studies"],
+  ["Journalism"],
+  ["Justice Studies"],
+  ["Literatures and Linguistics"],
+  ["Marketing"],
+  ["Mathematics"],	
+  ["Medical Imaging"],
+  ["Medical Laboratory Science"],
+  ["Music"],
+  ["Music Education"],
+  ["Nursing"],
+  ["Philosophy"],
+  ["Physics (Applied/Industrial)"],
+  ["Police Studies"],
+  ["Political Science"],
+  ["Pre-Agriculture"],
+  ["Pre-Chiropractic Medicine"],
+  ["Pre-Dentistry"],
+  ["Pre-Law"],
+  ["Pre-Medicine"],
+  ["Pre-Nutrition"],
+  ["Pre-Occupational therapy"],
+  ["Pre-Optometry"],
+  ["Pre-Pharmacy"],
+  ["Pre-Physical Therapy"],
+  ["Pre-Veterinary Medicine"],
+  ["Psychology"],
+  ["Religious Studies"],
+  ["Resource & Environmental Studies"],
+  ["Secondary Education"],
+  ["Social Work"],
+  ["Sociology & Social Studies"],
+  ["Software Systems Development"],
+  ["Sport and Recreation Management"],
+  ["Statistics"],
+  ["Theatre (Acting, Production, Design)"],
+  ["Therapeutic Recreation"],
+  ["Urban History"],
+  ["Visual Arts (Art Studies, Art Studio)"],
+  ["Women's and Gender Studies"]], :include_blank => {:year => "Select a Year"} %>  
+
+
+  <div><%= f.submit "Add Information", class: 'btn btn-large btn-primary' %></div>
+<% end %>

@@ -6,7 +6,7 @@
 
 <div class='row'>
   <div class='span6 offset3'>
-  <%= form_for @user, url: wizard_path do |f| %>
+  <%= form_for @user, :url => '/profile/update' do |f| %>
     <!-- # <%= devise_error_messages! %> -->
     <%= render 'shared/error_messages' %>
     <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>

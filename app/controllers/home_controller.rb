@@ -16,6 +16,13 @@ class HomeController < ApplicationController
   end
   
   def how
+    puts 'hohohhohowowow'
+    puts params
+    puts current_user
+  end
+  
+  def phone
+    @user = current_user
   end
   
   def send_confirmation

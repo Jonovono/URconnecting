@@ -2,129 +2,26 @@
 
 <div class='row'>
   <div class='span6 offset3'>
+    <h4>You must have a University of Regina email account!</h4>
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <!-- # <%= devise_error_messages! %> -->
     <%= render 'shared/error_messages' %>
+    
+    <%= f.hidden_field :status, :value => 'phone' %>
+    <%= f.hidden_field :password, :value => 'password' %>
+    <%= f.hidden_field :password_confirmation, :value => 'password' %>
+    
 
     <%= f.label :email, "* Email: Must be a University of Regina Email" %>
     <%= f.email_field :email, :placeholder => 'Example: dojohn@uregina.ca' %>
     
-    <br />
-    <%= f.input :gender, :collection => [["Male", 0], ["Female", 1]], :as => :radio_buttons %>
-    <%= f.label :year_born, "* Year you were born" %>
-    <%= f.select :year_born,  (1940..Time.now.year).to_a, :include_blank => {:year => "Select a Year"} %>
-    <br />
-    <br />
-    
-    <%= f.label :university_year, "Year of University" %>
-    <%= f.select :university_year,  1..10, :include_blank => {:year => "Select a Year"} %>
-    
-    <%= f.label :occupation, "I am..." %>
-    <%= f.select :occupation,  [["Undergrad Student", 0], ["Master Student", 1], 
-                                ["PhD Student", 2], ["Faculty/Staff", 3],
-                                ["President Dr. Vianne Timmons", 4], ["Other", 5]], :include_blank => {:year => "Select a Year"}%>
-                                
-    <%= f.label :studying %>
-    <%= f.select :studying,  [["Accounting"],	
-    ["Actuarial Science"],
-    ["Adapted Movement Science"],
-    ["Anthropology"],
-    ["Art History"],
-    ["Art Studies"],
-    ["Arts and Culture"],
-    ["Arts Education"],
-    ["Baccalauréat en éducation (le Bac)"],
-    ["Biochemistry"],
-    ["Biology"],
-    ["Business"],
-    ["Chemical Technology"],
-    ["Chemistry"],
-    ["Classical and Medieval Studies"],
-    ["Computer Science"],
-    ["Creative Writing"],
-    ["Dance Education"],
-    ["Economics (BA & BSc)"],
-    ["Education"],
-    ["Engineering – Electronic Systems"],
-    ["Engineering – Environmental Systems"],
-    ["Engineering – Industrial Systems"],
-    ["Engineering – Petroleum Systems"],
-    ["Engineering – Software Systems"],
-    ["English"],
-    ["Entrepreneurship"],
-    ["Environmental Biology"],
-    ["Environmental Health & Science"],
-    ["Film & Video Production"],
-    ["Film and Video Studies"],
-    ["Finance"],
-    ["Francophone Studies"],
-    ["French"],
-    ["General Management"],
-    ["Geography"],
-    ["Geology"],
-    ["Health Promotion"],
-    ["Health Studies"],
-    ["History"],	
-    ["Human Justice"],
-    ["Human Kinetics"],
-    ["Human Resource Management"],
-    ["Indian Fine Arts"],
-    ["Indian Languages"],
-    ["Indigenous Education"],
-    ["Indigenous Studies"],
-    ["International Business"],	
-    ["International Languages"],	
-    ["International Studies"],
-    ["Journalism"],
-    ["Justice Studies"],
-    ["Literatures and Linguistics"],
-    ["Marketing"],
-    ["Mathematics"],	
-    ["Medical Imaging"],
-    ["Medical Laboratory Science"],
-    ["Music"],
-    ["Music Education"],
-    ["Nursing"],
-    ["Philosophy"],
-    ["Physics (Applied/Industrial)"],
-    ["Police Studies"],
-    ["Political Science"],
-    ["Pre-Agriculture"],
-    ["Pre-Chiropractic Medicine"],
-    ["Pre-Dentistry"],
-    ["Pre-Law"],
-    ["Pre-Medicine"],
-    ["Pre-Nutrition"],
-    ["Pre-Occupational therapy"],
-    ["Pre-Optometry"],
-    ["Pre-Pharmacy"],
-    ["Pre-Physical Therapy"],
-    ["Pre-Veterinary Medicine"],
-    ["Psychology"],
-    ["Religious Studies"],
-    ["Resource & Environmental Studies"],
-    ["Secondary Education"],
-    ["Social Work"],
-    ["Sociology & Social Studies"],
-    ["Software Systems Development"],
-    ["Sport and Recreation Management"],
-    ["Statistics"],
-    ["Theatre (Acting, Production, Design)"],
-    ["Therapeutic Recreation"],
-    ["Urban History"],
-    ["Visual Arts (Art Studies, Art Studio)"],
-    ["Women's and Gender Studies"]], :include_blank => {:year => "Select a Year"} %>  
-    
-    <!-- <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>
-    <%= f.telephone_field :phone, :placeholder => 'Example: 1306777888' %> -->
-
-    <%= f.label :password %>
+    <!-- <%= f.label :password %>
     <%= f.password_field :password %>
 
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %> -->
 
-    <div><%= f.submit "Sign up", class: 'btn btn-large btn-primary' %></div>
+    <div><%= f.submit "Begin Registration", class: 'btn btn-large btn-primary' %></div>
   <% end %>
 
   <%= render "devise/shared/links" %>

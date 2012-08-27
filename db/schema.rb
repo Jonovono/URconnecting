@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824220554) do
+ActiveRecord::Schema.define(:version => 20120827030730) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "conversations", :force => true do |t|
     t.integer  "user1_id"
@@ -59,6 +67,17 @@ ActiveRecord::Schema.define(:version => 20120824220554) do
     t.integer  "university_year"
     t.integer  "occupation"
     t.string   "studying"
+    t.string   "facebook_link"
+    t.string   "location"
+    t.string   "uid"
+    t.string   "oath_token"
+    t.datetime "oauth_expires_at"
+    t.string   "image"
+    t.string   "fb_username"
+    t.datetime "birthdate"
+    t.string   "provider"
+    t.string   "relationship_status"
+    t.integer  "temp_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

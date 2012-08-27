@@ -1,5 +1,12 @@
 Urdating::Application.routes.draw do
 
+  get "sms/index"
+
+  resources :profile
+  match 'home/phone' => 'home#phone', :as => 'profile_phone'
+
+  resources :authentications
+
   get "home/index"
 
   get "home/about"
@@ -11,6 +18,10 @@ Urdating::Application.routes.draw do
   # devise_for :users
   
   match "/send_confirmation" => 'home#send_confirmation'
+  match '/auth/:provider/callback' => 'authentications#create'
+  match '/profile' => 'profile#index', :as => :profile
+  match '/incoming' => 'sms#index'
+  
 
 
   devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => 'users/confirmations'}

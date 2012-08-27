@@ -4,14 +4,17 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   
   has_many :conversations
+  has_many :authentications
   
   def conversations
     Conversation.where('user1_id = ? or user2_id = ?', self.id, self.id)
   end
   
-  before_create :check_phone_length, :if => :active?
+  validate :check_phone_length, :if => :active?
   before_create :add_phone_validator
-  before_save :check_confirmations, :if => :active?
+  # before_validation :set_default_password
+  
+  validate :check_confirmations, :if => :active_or_info?
   
   validate :check_if_president
   
@@ -20,7 +23,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :phone, :user_entered_confirmation, :status,
-                  :gender, :year_born, :university_year, :occupation, :studying
+                  :gender, :year_born, :university_year, :occupation, :studying, :temp_id, :first_name, :last_name,
+                  :facebook_link, :location, :uid, :oath_token, :oauth_expires_at, :image, :fb_username, :birthdate,
+                  :provider, :relationship_status
   
   validates :email, :uniqueness => true, :if => :active?
   # validates :email, :format => {:with => /^.+@uregina.ca+$/, 
@@ -31,8 +36,8 @@ class User < ActiveRecord::Base
   validates :phone, :format => {:with => /^[\(\)0-9\- \+\.]{10,20}$/,
                                 :message => "You must enter an area code."}, :if => :active?
                                 
-  validates :gender, :presence => true
-  validates :year_born, :presence => true
+  # validates :gender, :presence => true
+  # validates :year_born, :presence => true
   
   UNDERGRAD = 0
   MASTER = 1
@@ -43,11 +48,115 @@ class User < ActiveRecord::Base
   
   MALE = 0
   FEMALE = 1
+  
+  def self.from_omniauth(auth, current_us)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      puts 'omnininini'
+      puts user
+      puts user.email
+      
+      ed = auth.extra.raw_info.education
+      school = ""
+      concentration = ""
+      ed.each do |e|
+        if e.type == 'College'
+          # puts e
+          puts e
+          e.concentration.each do |con|
+            puts con.name
+            concentration = concentration + con.name + " "
+          end
+        end
+      end
 
+      user.relationship_status = auth.extra.raw_info.relationship_status
+      user.provider = auth.provider
+      user.birthdate = Date.strptime(auth.extra.raw_info.birthday, '%m/%d/%Y')
+      user.fb_username = auth.info.nickname
+      user.image = auth.info.image
+      user.gender = auth.extra.raw_info.gender
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.oath_token = auth.credentials.token
+      user.uid = auth.uid
+      user.location = auth.info.location
+      user.facebook_link = auth.extra.raw_info.link
+      user.studying = concentration
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.status = 'info'
+      user.email = current_us.email
+      user.password = 'password'
+      user.password_confirmation = 'password'
+      user.save!
+    end
+  end
+
+  def add_authentication_values(auth)
+    ed = auth.extra.raw_info.education
+    school = ""
+    concentration = ""
+    ed.each do |e|
+      if e.type == 'College'
+        # puts e
+        puts e
+        e.concentration.each do |con|
+          puts con.name
+          concentration = concentration + con.name + " "
+        end
+      end
+    end
+    
+    self.relationship_status = auth.extra.raw_info.relationship_status
+    self.provider = auth.provider
+    self.birthdate = Date.strptime(auth.extra.raw_info.birthday, '%m/%d/%Y')
+    self.fb_username = auth.info.nickname
+    self.image = auth.info.image
+    self.gender = auth.extra.raw_info.gender
+    self.oauth_expires_at = Time.at(auth.credentials.expires_at)
+    self.oath_token = auth.credentials.token
+    self.uid = auth.uid
+    self.location = auth.info.location
+    self.facebook_link = auth.extra.raw_info.link
+    self.studying = concentration
+    self.first_name = auth.info.first_name
+    self.last_name = auth.info.last_name
+    self.save!
+  end
+
+
+  def set_default_password
+    puts 'setttttting passworddddd'
+    self.password = 'password'
+    self.password_confirmation = 'password'
+  end
+  
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.birthdate.year - (self.birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+    
+  
+  def user_info
+    "(#{self.gender?}, age: #{self.age}, studying: #{self.studying})"
+  end
         
   def active?
+    puts 'isitactive'
+    puts status
     status == 'active'                        
   end
+  
+  def on_beginning_steps?
+    !active? && !status.include?("phone")
+  end
+  
+  def active_or_info?
+    puts 'activeorinfo'
+    puts status
+    puts self.status
+    active? ||  status.include?("phone")
+  end
+    
   
   def gender?
     gend = self.gender
@@ -78,9 +187,9 @@ class User < ActiveRecord::Base
       
   
   def add_phone_validator
-    confirm = (0...9).map{65.+(rand(20))}.join[0..4]
+    confirm = (0...9).map{(rand(20))}.join[0..4]
     while User.find_by_phone_confirm(confirm)
-      confirm = (0...9).map{65.+(rand(20))}.join[0..4]
+      confirm = (0...9).map{(rand(20))}.join[0..4]
     end
     self.phone_confirm = confirm
   end

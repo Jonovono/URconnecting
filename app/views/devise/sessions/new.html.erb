@@ -1,5 +1,9 @@
 <center><h1>Sign in</h1></center>
 
+<center><a href="/auth/facebook" id="fb-login"><img src="/assets/facebook_login_button.png" width="500"></a></center>
+
+
+<% if false %>
 <div class='row'>
   <div class='span6 offset3'>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -19,3 +23,4 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
+<% end %>

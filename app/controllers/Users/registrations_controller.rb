@@ -28,8 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new
-    puts 'pleaseesesesesese'
-    puts params
-    super
+    resource = build_resource({})
+    if current_user
+      redirect_to root_path
+    else
+      respond_with resource
+    end
   end
 end
