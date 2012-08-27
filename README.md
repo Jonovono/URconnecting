@@ -1,1 +1,2 @@
-# This is just the beginning of a new dating site. It will be open for university of regina folks only.
+# This is just the beginning of a Hubchilla like site but only for the University Of Regina. Made just for fun.
+
