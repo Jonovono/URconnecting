@@ -207,6 +207,8 @@ class User < ActiveRecord::Base
   end
   
   def check_confirmations
+    puts 'checking the confirmations'
+    puts self.status
     puts self.phone_confirm
     puts self.user_entered_confirmation
     if phone_confirm != user_entered_confirmation

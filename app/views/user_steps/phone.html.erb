@@ -9,6 +9,8 @@
   <%= form_for @user, url: wizard_path do |f| %>
     <!-- # <%= devise_error_messages! %> -->
     <%= render 'shared/error_messages' %>
+    <%= f.hidden_field :status, :value => 'phone' %>
+
     <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>
     <%= f.telephone_field :phone, :placeholder => 'Example: 1306777888' %>
     
