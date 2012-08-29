@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827030730) do
+ActiveRecord::Schema.define(:version => 20120828064745) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(:version => 20120827030730) do
   end
 
   create_table "conversations", :force => true do |t|
-    t.integer  "user1_id"
-    t.integer  "user2_id"
     t.datetime "ended_at"
     t.integer  "status"
     t.datetime "created_at", :null => false
@@ -35,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20120827030730) do
     t.text     "message"
     t.integer  "user_id"
     t.datetime "sent"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "user_playings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "date_joined"
+    t.datetime "time_waiting"
+    t.integer  "conversation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

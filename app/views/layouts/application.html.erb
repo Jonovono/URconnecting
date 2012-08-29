@@ -16,7 +16,7 @@
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "URDating.com", '/', id: "logo" %>
+          <%= link_to "URconnecting.ca", '/', id: "logo" %>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Home",    '#' %></li>
@@ -27,6 +27,7 @@
                 <li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete %></li>
               <% else %>
                 <li><%= link_to "Sign in", '/users/sign_in' %></li>
+                <li><%= link_to "Sign up", '/users/sign_up' %></li>
               <% end %>
             </ul>
           </nav>

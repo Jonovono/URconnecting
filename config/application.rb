@@ -14,9 +14,7 @@ module Urdating
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
-    SMS = Nexmo::Client.new('404e7d57', '721423dd')
-    
+        
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)

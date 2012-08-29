@@ -9,6 +9,7 @@ gem 'simple_form'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pg'
+gem 'redis'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

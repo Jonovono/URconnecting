@@ -5,12 +5,17 @@ class User < ActiveRecord::Base
   
   has_many :conversations
   has_many :authentications
+  has_many :user_playing
+  has_many :conversations, :through => :user_playing
   
-  def conversations
-    Conversation.where('user1_id = ? or user2_id = ?', self.id, self.id)
-  end
+  # def conversations
+  #   Conversation.where('user1_id = ? or user2_id = ?', self.id, self.id)
+  # end
   
   validate :check_phone_length, :if => :active?
+  validate :only_one_active_conversation
+  validate :only_one_waiting_conversation
+  
   before_create :add_phone_validator
   # before_validation :set_default_password
   
@@ -48,6 +53,7 @@ class User < ActiveRecord::Base
   
   MALE = 0
   FEMALE = 1
+  
   
   def self.from_omniauth(auth, current_us)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -138,6 +144,36 @@ class User < ActiveRecord::Base
   
   def user_info
     "(#{self.gender?}, age: #{self.age}, studying: #{self.studying})"
+  end
+  
+  def talking?
+    puts 'checking if the user is currently talking'
+    up = UserPlaying.where(:user_id => self.id, :status => 2)
+    if !up.empty?
+      true
+    else
+      false
+    end
+  end
+  
+  def inactive?
+    puts 'checking if the user is currently inactive'
+    up = UserPlaying.where("user_id = ? and (status = ? or status = ?)", self.id, 1, 2)
+    if !up.empty?
+      false
+    else
+      true
+    end
+  end
+  
+  def waiting?
+    puts 'checking if user is waiting'
+    up = UserPlaying.where("user_id = ? and status = ?", self.id, 1)
+    if !up.empty?
+      true
+    else
+      false
+    end
   end
         
   def active?
@@ -232,6 +268,10 @@ class User < ActiveRecord::Base
     end
     puts temp
     self.phone = temp
+  end
+  
+  def chatting?
+    
   end
   
   # attr_accessible :title, :body

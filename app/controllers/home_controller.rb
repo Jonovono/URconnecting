@@ -31,11 +31,10 @@ class HomeController < ApplicationController
     @phone = params[:phone]
     @user = current_user
     puts current_user
-    sms = Urdating::Application::SMS
-    
+        
     message = "Hello. Thanks for registering on **. Your confirmation code is #{@user.phone_confirm}. Please enter it on that same page and click submit!"
     
-    response = sms.send_message({
+    response = $sms.send_message({
       from: '16477252253',
         to: @phone,
       text: message
