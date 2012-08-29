@@ -21,7 +21,7 @@ Urdating::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   match '/profile' => 'profile#index', :as => :profile
   match '/incoming' => 'sms#index'
-  match '/sms' => 'sms#index'
+  match '/sms' => 'sms#index', :via => [:get, :post]
   
 
 
