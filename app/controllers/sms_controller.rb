@@ -19,6 +19,7 @@ class SmsController < ApplicationController
       message = "Greetings! You don't seem to be registered for our service. Please go to www.urconnecting.com and follow the steps!"
       send_message(phone_number, message)
     end 
+    render :nothing => true
   end
   
   
@@ -158,7 +159,6 @@ class SmsController < ApplicationController
       message = "#start = Find Partner, #next = Find New Partner, #end = Sign Out, #help = This Message"
       send_message(phone_number, message)
       puts 'help sent'
-      true
     end  
     
     def pair_up(user_playing)
