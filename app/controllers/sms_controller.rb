@@ -28,7 +28,7 @@ class SmsController < ApplicationController
       first = message.first
       if first == '#'
         last = message[1..-1]
-        intent = case last
+        case last
         when "start" then add_to_waiting(phone_number)
         when "next" then new_partner(phone_number)
         when "help" then send_help(phone_number)
@@ -154,8 +154,11 @@ class SmsController < ApplicationController
     end
 
     def send_help(phone_number)
+      puts 'we will be sending help'
       message = "#start = Find Partner, #next = Find New Partner, #end = Sign Out, #help = This Message"
       send_message(phone_number, message)
+      puts 'help sent'
+      true
     end  
     
     def pair_up(user_playing)
