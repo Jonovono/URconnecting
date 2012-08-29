@@ -3,12 +3,18 @@ class SmsController < ApplicationController
     puts 'Incoming text message received'
     info = params
     
-    phone_number = info['msisdn']
-    check_phone_length!(phone_number)
+    # For nexma response
+    # phone_number = info['msisdn']
+    # message_id = info['messageId']
+    # message = info['text']
+    # time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
     
-    message_id = info['messageId']
-    message = info['text']
-    time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
+    # Parse twilio response
+    phone_number = info["From"]
+    message = info["Body"]
+    message_id = info["SmsMessageSid"]
+    
+    check_phone_length!(phone_number)
         
     @user = User.find_by_phone(phone_number)
     if @user
@@ -199,6 +205,9 @@ class SmsController < ApplicationController
     def check_phone_length!(phone)
       if phone.length == 10
         phone.insert(0, '1')
+      end
+      if phone.length == 12
+        phone[0] = ''
       end
       phone
     end
