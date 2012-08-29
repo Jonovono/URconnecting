@@ -10,14 +10,14 @@ class SmsController < ApplicationController
     message = info['text']
     time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
         
-    @user = find_user(phone_number)
+    @user = User.find_by_phone(phone_number)
     if @user
       puts 'the user does exist in our database'
       get_intent(message, phone_number, @user)
     else
       puts 'we will send them a message telling them to register first'
       message = "Greetings! You don't seem to be registered for our service. Please go to www.urconnecting.com and follow the steps!"
-      send_message(phone_number, message)
+      msg(phone_number, message)
     end 
   end
   
@@ -29,12 +29,14 @@ class SmsController < ApplicationController
       if first == '#'
         last = message[1..-1]
         intent = case last
-        when "start" then find_partner(user)
-        when "next" then new_partner
+        when "start" then add_to_waiting(phone_number)
+        when "next" then new_partner(phone_number)
         when "help" then send_help(phone_number)
         when "options" then send_help(phone_number)
-        when "stop" then stop_chat
-        when "end" then stop_chat
+        when "stop" then stop_chat(phone_number)
+        when "end" then stop_chat(phone_number)
+        when 'stats' then show_stats(phone_number)
+        else send_message(phone_number, message)
         end
       end
     end
@@ -47,26 +49,110 @@ class SmsController < ApplicationController
       end
     end
     
-    def find_partner(user)
-      sms = Urdating::Application::SMS
-      
-      if user.waiting?
+    def add_to_waiting(phone_number)
+      if $redis.SISMEMBER("waiting", phone_number) == 1
         message = "You are already waiting for a partner. We will send you a message when one becomes available!"
-        send_message(user.phone, message)
-      elsif user.talking?
-        message = "You are already in a conversation. If you want a new partner type #next"
-        send_message(user.phone, message)
+        send_message(phone_number, message)
+      elsif $redis.SISMEMBER("talking", phone_number) == 1
+        message = "You are already talking to someone. For a new partner message #next"
+        send_message(phone_number, message)
       else
-        user_playing = UserPlaying.new(:user_id => user.id, :status => 1)
-        
-        if user_playing.save
-          pair_up(user_playing)
-        else
-          puts 'failed to save the user_playing'
-        end
+        $redis.SADD("waiting", phone_number)
+      end
+      
+      found = find_partner(phone_number)
+      if !found
+        message = 'Everyone else is currently talking. You will be alerted when someone comes available!'
+        send_message(phone_number, message)
       end
     end
     
+    def find_partner(phone_number)
+      num_waiting = $redis.SCARD('waiting')
+      if num_waiting < 2
+        return false
+      end
+      num1 = phone_number
+      num2 = $redis.SPOP('waiting')
+      
+      $redis.SET(num1, num2)
+      $redis.SET(num2, num1)
+      
+      $redis.SADD("talking", num1)
+      $redis.SADD("talking", num2)
+      
+      message_users_begin_chat(num1, num2)
+      true
+    end
+    
+    def message_users_begin_chat(num1, num2)
+      user1 = User.find_by_phone(num1)
+      user2 = User.find_by_phone(num2)
+      
+      message1 = 'You are paired with user1'
+      message2 = 'You are paired with user2'
+      
+      send_message(num1, message1)
+      send_message(num2, message2)
+    end
+    
+    def new_partner(phone_number)
+      if ($redis.SISMEMBER("waiting", phone_number) == 1)
+        message = "You are already waiting for a partner. You will be alerted when one comes availabel!"
+        send_message(phone_number, message)
+      elsif ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
+        add_to_waiting(phone_number)
+      elsif ($redis.SISMEMBER("talking", phone_number) == 1)
+        $redis.SREM('talking', phone_number)
+        $redis.SREM('talking', peer)
+        
+        $redis.DELETE(phone_number)
+        peer = $redis.GET(phone_number)
+        if peer
+          $redis.DELETE(peer)
+          message = 'Your partner has disconnected. You will be matched to a new user. If you want to stop talking as well message #end'
+          send_message(peer, message)
+          add_to_waiting(peep)
+        end
+        message = 'You have asked to find a new partner. We will find you one right away!'
+        send_message(phone_number, message)
+        add_to_waiting(peep)
+      end
+    end
+        
+    def stop_chat(phone_number)
+      if ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
+        message = 'You are already signed out. If you want to start talking respond with #start'
+        send_messsage(phone_number, message)
+      elsif $redis.SISMEMBER("waiting", phone_number) == 1
+        $redis.SREM('waiting', number)
+        message = 'You have been removed from the waiting list and wont be paired up to talk to anyone. Whenever you want to talk again send #start to this number'
+        send_message(phone_number, message)
+      elsif $redis.SISMEMBER("talking", phone_number) == 1
+        $redis.SREM('talking', phone_number)
+        peer = $redis.GET(phone_number)
+        $redis.DELETE(phone_number)
+        if peer
+          $redis.DELETE(peer)
+          message = 'Your partner has disconnected. You will be matched to a new user. If you want to stop talking as well message #end'
+          send_message(peer, message)
+          add_to_waiting(peep)
+        end
+        message = 'You have disconnected. You will not receive any messages. Whe you want to talk again message #start to this number'
+        send_message(phone_number, message)
+      end
+    end
+    
+    def msg(phone_number, msg)
+      peer = $redis.GET(phone_number)
+      if !peer
+        puts 'eek user must have disconnected'
+        return false
+      end
+      message = 'yay a text is being sent'
+      send_message(peer, message)
+    end
+
     def send_help(phone_number)
       message = "#start = Find Partner, #next = Find New Partner, #end = Sign Out, #help = This Message"
       send_message(phone_number, message)
@@ -77,6 +163,13 @@ class SmsController < ApplicationController
       if UserPlaying.waiting_users?
         puts 'There are currently no users waiting to talk. When one comes available you will be paired up'
       end
+    end
+    
+    def show_stats(phone_number)
+      num_waiting = $redis.SCARD('waiting')
+      num_talking = $redis.SCARD('talking')
+      message = "Waiting: #{num_waiting}, Talking: #{num_talking}"
+      send_message(phone_number, message)
     end
     
     # Sends a message to specified message
