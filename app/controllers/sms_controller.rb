@@ -126,7 +126,7 @@ class SmsController < ApplicationController
         message = 'You are already signed out. If you want to start talking respond with #start'
         send_messsage(phone_number, message)
       elsif $redis.SISMEMBER("waiting", phone_number) == 1
-        $redis.SREM('waiting', number)
+        $redis.SREM('waiting', phone_number)
         message = 'You have been removed from the waiting list and wont be paired up to talk to anyone. Whenever you want to talk again send #start to this number'
         send_message(phone_number, message)
       elsif $redis.SISMEMBER("talking", phone_number) == 1
@@ -171,7 +171,8 @@ class SmsController < ApplicationController
     def show_stats(phone_number)
       num_waiting = $redis.SCARD('waiting')
       num_talking = $redis.SCARD('talking')
-      message = "Waiting: #{num_waiting}, Talking: #{num_talking}"
+      total_users = User.count
+      message = "Waiting: #{num_waiting}, Talking: #{num_talking}, Registered Users: #{total_users}"
       send_message(phone_number, message)
     end
     
