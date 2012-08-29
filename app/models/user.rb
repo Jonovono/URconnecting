@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   # end
   
   validate :check_phone_length, :if => :active?
-  validate :only_one_active_conversation
-  validate :only_one_waiting_conversation
+  # validate :only_one_active_conversation
+  # validate :only_one_waiting_conversation
   
   before_create :add_phone_validator
   # before_validation :set_default_password

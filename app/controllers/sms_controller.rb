@@ -17,7 +17,7 @@ class SmsController < ApplicationController
     else
       puts 'we will send them a message telling them to register first'
       message = "Greetings! You don't seem to be registered for our service. Please go to www.urconnecting.com and follow the steps!"
-      msg(phone_number, message)
+      send_message(phone_number, message)
     end 
   end
   
@@ -36,7 +36,7 @@ class SmsController < ApplicationController
         when "stop" then stop_chat(phone_number)
         when "end" then stop_chat(phone_number)
         when 'stats' then show_stats(phone_number)
-        else send_message(phone_number, message)
+        else msg(phone_number, message)
         end
       end
     end
@@ -176,7 +176,7 @@ class SmsController < ApplicationController
     def send_message(number, message)
       response = $sms.send_message({
         from: '16477252253',
-          to: phone_number,
+          to: number,
         text: message
       })
       
