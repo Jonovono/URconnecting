@@ -22,7 +22,7 @@ Urdating::Application.routes.draw do
   match '/profile' => 'profile#index', :as => :profile
   match '/incoming' => 'sms#index'
   match '/sms' => 'sms#index', :via => [:get, :post]
-  
+  match '/twilio' => 'sms#index', :via => [:post]
 
 
   devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => 'users/confirmations'}
