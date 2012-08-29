@@ -178,17 +178,22 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
-      response = $sms.send_message({
-        from: '16477252253',
-          to: number,
-        text: message
-      })
-      
-      if response.success?
-        puts "Sent message #{response.message_id}"
-      elsif response.failure?
-        raise response.error
-      end
+      $sms.account.sms.messages.create(
+        :from => '+14509000103',
+        :to => number,
+        :body => message
+      )
+      # response = $sms.send_message({
+      #   from: '16477252253',
+      #     to: number,
+      #   text: message
+      # })
+      # 
+      # if response.success?
+      #   puts "Sent message #{response.message_id}"
+      # elsif response.failure?
+      #   raise response.error
+      # end
     end
     
     def check_phone_length!(phone)
