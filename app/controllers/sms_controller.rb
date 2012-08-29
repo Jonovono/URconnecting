@@ -36,11 +36,18 @@ class SmsController < ApplicationController
       if first == '#'
         last = message[1..-1]
         case last
-        when "start" then add_to_waiting(phone_number)
+        when "on" then add_to_waiting(phone_number)
+        when "talk" then add_to_waiting(phone_number)
+        when "find" then add_to_waiting(phone_number)
+        when "play" then add_to_waiting(phone_number)
+        when "begin" then add_to_waiting(phone_number)
+          
         when "next" then new_partner(phone_number)
-        when "help" then send_help(phone_number)
+          
+        when "how" then send_help(phone_number)
         when "options" then send_help(phone_number)
-        when "stop" then stop_chat(phone_number)
+          
+        when "off" then stop_chat(phone_number)
         when "end" then stop_chat(phone_number)
         when 'stats' then show_stats(phone_number)
         else msg(phone_number, message)
@@ -162,7 +169,7 @@ class SmsController < ApplicationController
 
     def send_help(phone_number)
       puts 'we will be sending help'
-      message = "#start = Find Partner, #next = Find New Partner, #end = Sign Out, #help = This Message"
+      message = "#talk = Find Partner, #next = Find New Partner, #off = Sign Out, #how = This Message"
       send_message(phone_number, message)
       puts 'help sent'
     end  
@@ -184,6 +191,7 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
+      puts "Sending a message to #{number}"
       $sms.account.sms.messages.create(
         :from => '+14509000103',
         :to => number,
