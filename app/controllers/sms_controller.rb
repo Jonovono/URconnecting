@@ -109,8 +109,8 @@ class SmsController < ApplicationController
       message1 = user1.user_info
       message2 = user2.user_info
       
-      send_message(num1, message1)
-      send_message(num2, message2)
+      send_message(num1, message2)
+      send_message(num2, message1)
     end
     
     def new_partner(phone_number)
