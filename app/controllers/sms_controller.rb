@@ -145,7 +145,7 @@ class SmsController < ApplicationController
     def stop_chat(phone_number)
       if ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
         message = 'You are already signed out. If you want to start talking respond with #start'
-        send_messsage(phone_number, message)
+        send_message(phone_number, message)
       elsif $redis.SISMEMBER("waiting", phone_number) == 1
         $redis.SREM('waiting', phone_number)
         message = 'You have been removed from the waiting list and wont be paired up to talk to anyone. Whenever you want to talk again send #start to this number'
