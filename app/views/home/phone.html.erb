@@ -6,8 +6,10 @@
 
 <div class='row'>
   <div class='span6 offset3'>
-  <%= form_for @user, :url => '/profile/update' do |f| %>
+  <%= form_for @user, :url => '/phone_update' do |f| %>
     <!-- # <%= devise_error_messages! %> -->
+    <%= f.hidden_field :status, :value => 'active' %>
+
     <%= render 'shared/error_messages' %>
     <%= f.label :phone, "Enter your mobile phone number (with area code). Do not worry, no one will ever see this." %>
     <%= f.telephone_field :phone, :placeholder => 'Example: 1306777888' %>
@@ -23,7 +25,7 @@
     <p>If you are not seeing a text message make sure your phone number is correct (should be 10 or 11 numbers). If still not working email me.
     
     <%= f.label :user_entered_confirmation, "Enter confirmation code" %>
-    <%= f.text_field :user_entered_confirmation, :placeholder => 'Five digit confirmation code' %>
+    <%= f.text_field :user_entered_confirmation, :placeholder => 'Five digit confirmation code', :value => '' %>
 
     <div><%= f.submit "Continue", class: 'btn btn-large btn-primary' %></div>
   <% end %>

@@ -21,6 +21,22 @@ class HomeController < ApplicationController
     puts current_user
   end
   
+  def phone_update
+    @user = current_user
+    puts 'updatingtheuser'
+    puts params
+    
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to home_how_path, notice: 'Added information!!.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "phone" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   def phone
     @user = current_user
   end

@@ -4,6 +4,7 @@ Urdating::Application.routes.draw do
 
   resources :profile
   match 'home/phone' => 'home#phone', :as => 'profile_phone'
+  match '/phone_update' => 'home#phone_update', :via => [:put]
 
   resources :authentications
 
