@@ -120,20 +120,25 @@ class SmsController < ApplicationController
       elsif ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
         add_to_waiting(phone_number)
       elsif ($redis.SISMEMBER("talking", phone_number) == 1)
-        $redis.SREM('talking', phone_number)
-        $redis.SREM('talking', peer)
-        
-        $redis.DEL(phone_number)
         peer = $redis.GET(phone_number)
+        $redis.DEL(phone_number)
+        
         if peer
+          $redis.SREM('talking', peer)
+          $redis.SREM('talking', phone_number)
           $redis.DEL(peer)
           message = 'Your partner has disconnected. You will be matched to a new user. If you want to stop talking as well message #end'
           send_message(peer, message)
-          add_to_waiting(peep)
-        end
-        message = 'You have asked to find a new partner. We will find you one right away!'
-        send_message(phone_number, message)
-        add_to_waiting(peep)
+          add_to_waiting(peer)
+          message = 'You have asked to find a new partner. We will find you one right away!'
+          send_message(phone_number, message)
+          add_to_waiting(phone_number)
+        else
+          $redis.SREM('talking', phone_number)
+          message = 'You have asked to find a new partner. We will find you one right away!'
+          send_message(phone_number, message)
+          add_to_waiting(phone_number)
+        end        
       end
     end
         
@@ -166,7 +171,7 @@ class SmsController < ApplicationController
         puts 'eek user must have disconnected'
         return false
       end
-      message = 'yay a text is being sent'
+      message = "Partner: #{msg}"
       send_message(peer, message)
     end
 
