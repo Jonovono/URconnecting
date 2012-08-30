@@ -161,19 +161,30 @@ class SmsController < ApplicationController
           send_message(peer, message)
           add_to_waiting(peer)
         end
-        message = 'You have disconnected. You will not receive any messages. Whe you want to talk again message #start to this number'
+        message = 'You have disconnected. You will not receive any messages. When you want to talk again message #start to this number'
         send_message(phone_number, message)
       end
     end
     
     def msg(phone_number, msg)
-      peer = $redis.GET(phone_number)
-      if !peer
-        puts 'eek user must have disconnected'
-        return false
+      if ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
+        message = 'You are signed out. If you want to find someone to talk with respond with #start'
+        send_message(phone_number, message)
+      elsif $redis.SISMEMBER("waiting", phone_number) == 1
+        $redis.SREM('waiting', phone_number)
+        message = 'You are currently on the waiting list so this message has no one to go to. When someone becomes available you will be alerted!'
+        send_message(phone_number, message)
+      elsif $redis.SISMEMBER("talking", phone_number) == 1
+        peer = $redis.GET(phone_number)
+        if !peer
+          puts 'eek user must have disconnected'
+          message = 'Uh oh, your user must have disconnected. We will go ahead and find you someone else.'
+          send_message(phone_number, message)
+          add_to_waiting(phone_number)
+        end
+        message = "Partner: #{msg}"
+        send_message(peer, message)
       end
-      message = "Partner: #{msg}"
-      send_message(peer, message)
     end
 
     def send_help(phone_number)
