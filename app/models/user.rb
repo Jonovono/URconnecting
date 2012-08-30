@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   #   Conversation.where('user1_id = ? or user2_id = ?', self.id, self.id)
   # end
   
-  validate :check_phone_length, :if => :active?
+  validate :check_phone_length, :if => :active_or_info?
+  before_save :check_phone_length, :if => :active_or_info?
   # validate :only_one_active_conversation
   # validate :only_one_waiting_conversation
   
@@ -143,7 +144,15 @@ class User < ActiveRecord::Base
     
   
   def user_info
-    "(#{self.gender?}, age: #{self.age}, studying: #{self.studying})"
+    message = "("
+    message << "#{self.gender?}, " if !self.gender.blank?
+    message << "age: #{self.age}, " if !self.age.blank?
+    message << "#{self.university_year.ordinalize}, " if !self.university_year.blank?
+    message << "studying: #{self.studying.chomp(' ')}" if !self.studying.blank?
+    message << "occupation: #{self.occupation?}" if !self.occupation.blank?
+    message << ")"
+    message
+    # "(#{self.gender?}, age: #{self.age}, studying: #{self.studying.chomp(' ')})"
   end
   
   def talking?
