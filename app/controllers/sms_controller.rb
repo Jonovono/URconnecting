@@ -106,8 +106,8 @@ class SmsController < ApplicationController
       user1 = User.find_by_phone(num1)
       user2 = User.find_by_phone(num2)
       
-      message1 = 'You are paired with user1'
-      message2 = 'You are paired with user2'
+      message1 = user1.user_info
+      message2 = user2.user_info
       
       send_message(num1, message1)
       send_message(num2, message2)

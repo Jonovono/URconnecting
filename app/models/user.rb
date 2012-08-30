@@ -144,13 +144,14 @@ class User < ActiveRecord::Base
     
   
   def user_info
-    message = "("
+    message = "You just connected with a new partner. ("
     message << "#{self.gender?}, " if !self.gender.blank?
     message << "age: #{self.age}, " if !self.age.blank?
     message << "#{self.university_year.ordinalize}, " if !self.university_year.blank?
     message << "studying: #{self.studying.chomp(' ')}" if !self.studying.blank?
     message << "occupation: #{self.occupation?}" if !self.occupation.blank?
-    message << ")"
+    message << ") "
+    message << "Say something to get started!"
     message
     # "(#{self.gender?}, age: #{self.age}, studying: #{self.studying.chomp(' ')})"
   end
