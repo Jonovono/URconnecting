@@ -50,11 +50,17 @@ class HomeController < ApplicationController
         
     message = "Hello. Thanks for registering on **. Your confirmation code is #{@user.phone_confirm}. Please enter it on that same page and click submit!"
     
-    response = $sms.send_message({
-      from: '16477252253',
-        to: @phone,
-      text: message
-    })
+    # response = $sms.send_message({
+    #   from: '16477252253',
+    #     to: @phone,
+    #   text: message
+    # })
+    
+    $sms.account.sms.messages.create(
+      :from => '+14509000103',
+      :to => @number,
+      :body => message
+    )
     render :nothing => true
   end
 end
