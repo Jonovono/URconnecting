@@ -50,8 +50,10 @@ class SmsController < ApplicationController
         when "off" then stop_chat(phone_number)
         when "end" then stop_chat(phone_number)
         when 'stats' then show_stats(phone_number)
-        else msg(phone_number, message)
+        else unknown_message(phone_number)
         end
+      else
+         msg(phone_number, message)
       end
     end
     
@@ -86,6 +88,7 @@ class SmsController < ApplicationController
       if num_waiting < 2
         return false
       end
+      $redis.SREM('waiting', phone_number)
       num1 = phone_number
       num2 = $redis.SPOP('waiting')
       
@@ -208,6 +211,12 @@ class SmsController < ApplicationController
       # elsif response.failure?
       #   raise response.error
       # end
+    end
+    
+    def unknown_message(phone_number)
+      message = 'Sorry. I am not sure what that command is. Here are the commands.'
+      send_message(phone_number, message)
+      send_help(phone_number)
     end
     
     def check_phone_length!(phone)
