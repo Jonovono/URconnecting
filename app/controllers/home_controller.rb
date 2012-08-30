@@ -58,7 +58,7 @@ class HomeController < ApplicationController
     
     $sms.account.sms.messages.create(
       :from => '+14509000103',
-      :to => @number,
+      :to => @phone,
       :body => message
     )
     render :nothing => true
