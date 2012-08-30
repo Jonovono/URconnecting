@@ -123,10 +123,10 @@ class SmsController < ApplicationController
         $redis.SREM('talking', phone_number)
         $redis.SREM('talking', peer)
         
-        $redis.DELETE(phone_number)
+        $redis.DEL(phone_number)
         peer = $redis.GET(phone_number)
         if peer
-          $redis.DELETE(peer)
+          $redis.DEL(peer)
           message = 'Your partner has disconnected. You will be matched to a new user. If you want to stop talking as well message #end'
           send_message(peer, message)
           add_to_waiting(peep)
@@ -148,9 +148,9 @@ class SmsController < ApplicationController
       elsif $redis.SISMEMBER("talking", phone_number) == 1
         $redis.SREM('talking', phone_number)
         peer = $redis.GET(phone_number)
-        $redis.DELETE(phone_number)
+        $redis.DEL(phone_number)
         if peer
-          $redis.DELETE(peer)
+          $redis.DEL(peer)
           message = 'Your partner has disconnected. You will be matched to a new user. If you want to stop talking as well message #end'
           send_message(peer, message)
           add_to_waiting(peep)
