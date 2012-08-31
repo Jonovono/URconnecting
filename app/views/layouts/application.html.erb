@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>URdating</title>
+    <title>URconnecting</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    
+    <meta property="og:title" content="URconnecting" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.urconnecting.com" />
+    <meta property="og:image" content="http://i.imgur.com/DQuxh.png" />
+    <meta property="og:site_name" content="URconnecting" />
+    <meta property="fb:admins" content="1663350002" />
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script type="text/javascript">var switchTo5x=true;</script>
+    <!-- <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "bd97bbe0-a599-4f0f-96fc-114aa76b4c70"}); </script>
+    <script type="text/javascript">stLight.options({publisher: "ur-ad096d7b-6528-9210-2ebd-de45a82daaa5"}); </script> -->
+    
+    <div id="fb-root"></div>
   </head>
   <body>
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "URconnecting.ca", '/', id: "logo" %>
+          <%= link_to "URconnecting.com", '/', id: "logo" %>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Home",    '#' %></li>
-              <li><%= link_to "About/Contact",    '#' %></li>
+              <li><%= link_to "About/Contact",    '/about' %></li>
               <% if user_signed_in? %>
                 <li><%= link_to "How to Use", home_how_path %></li>
                 <li><%= link_to "Add Info", profile_path %></li>
@@ -34,8 +43,45 @@
         </div>
       </div>
     </header>
-    <div class="container">
+    <div class="container content">
       <%= yield %>
     </div>
+    <div class="footer text-center">
+          <div class="container footer-border">
+            <div class="pull-left">
+              URconnecting.com
+            </div>
+            <div class='span5 offset6'>
+              <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tunesicles.com" data-text="oaeu" data-lang="en" data-hashtags="twbmtye">Tweet</a>
+            <span class='st_sharethis_hcount' displayText='ShareThis'></span>
+            <span class='st_twitter_hcount' displayText='Tweet'></span>
+            <span class='st_twitterfollow_hcount' displayText='Twitter Follow' st_username='URconnecting'></span> -->
+            
+            <div class="fb-like" data-href="http://www.urconnecting.com" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+            
+            <a href="https://twitter.com/URconnecting" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @URconnecting</a>
+            <a href="https://twitter.com/share" data-url='http://urconnecting.com' data-text='URconnecting matches you to a random University of Regina student and lets you text them' data-hashtags='URconnecting'
+            class="twitter-share-button" data-lang="en">Tweet</a>
+            </div>
+
+            <div class="pull-right">
+              <a href="/about">About/Contact</a> | 
+              <a href="/terms">Terms</a> | 
+              <a href="/privacy">Privacy</a> |
+            </div>
+          </div>
+        </div>
+        
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=424425824260829";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </body>
 </html>

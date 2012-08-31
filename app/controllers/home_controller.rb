@@ -21,6 +21,12 @@ class HomeController < ApplicationController
     puts current_user
   end
   
+  def terms
+  end
+  
+  def privacy
+  end
+  
   def phone_update
     @user = current_user
     puts 'updatingtheuser'

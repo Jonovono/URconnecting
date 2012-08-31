@@ -30,7 +30,13 @@ color: #999;
 }
 
 .information {
-margin-top: 50px;
+margin-top: 10px;
+padding-right: 60px;
+}
+
+.iphone {
+/*	padding-top: 40px;*/
+/*	padding-bottom: 10px;*/
 }
 
 .top {
@@ -42,6 +48,19 @@ text-align: center;
 
 #uofr {
 	color: green;
+}
+
+
+.footer {
+font-size: 12px;
+}
+.footer, .push {
+height: 87px;
+}
+
+.footer-border {
+border-top: 1px solid #EEE;
+padding-top: 10px;
 }
 
 

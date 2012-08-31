@@ -16,12 +16,13 @@
 #logo {
   float: left;
   margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 1.8em;
   color: #fff;
-  text-transform: uppercase;
+/*  text-transform: uppercase;*/
   letter-spacing: -1px;
+	font-family: 'Rokkitt', serif;
   padding-top: 9px;
-  font-weight: bold;
+/*  font-weight: bold;*/
   line-height: 1;
 }
 

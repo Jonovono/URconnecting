@@ -9,6 +9,9 @@ Urdating::Application.routes.draw do
   resources :authentications
 
   get "home/index"
+  match '/about' => 'home#about'
+  match '/terms' => 'home#terms'
+  match '/privacy' => 'home#privacy'
 
   get "home/about"
   get "home/how"
