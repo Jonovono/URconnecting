@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
 gem 'devise'
-gem "twitter-bootstrap-rails", :group => :assets
 gem 'wicked'
 gem 'nexmo'
 gem 'simple_form'
@@ -11,6 +10,8 @@ gem 'omniauth-facebook'
 gem 'pg'
 gem 'redis'
 gem 'twilio-ruby'
+gem "twitter-bootstrap-rails", :group => :assets
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -24,7 +25,6 @@ gem 'twilio-ruby'
 group :assets do
   gem 'sass-rails',   '~> 3.2.4'
   gem 'coffee-rails', '~> 3.2.2'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

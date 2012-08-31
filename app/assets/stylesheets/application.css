@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= test
  */
 
 
@@ -30,4 +31,3 @@
   color: #fff;
   text-decoration: none;
 }
-
