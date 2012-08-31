@@ -18,8 +18,14 @@ class SmsController < ApplicationController
         
     @user = User.find_by_phone(phone_number)
     if @user
-      puts 'the user does exist in our database'
-      get_intent(message, phone_number, @user)
+      if @user.good_to_go?
+        puts 'the user does exist in our database'
+        get_intent(message, phone_number, @user)
+      else
+        puts 'the user does exist in our database but appears to not hove completed registration.'
+        message = "Hey there! We see you have started registering but it looks like you have not finished. You should log in with FB to complete. If you are having problems email contact@urconnecting.com. Thanks!"
+        send_message(phone_number, message)
+      end
     else
       puts 'we will send them a message telling them to register first'
       message = "Greetings! You don't seem to be registered for our service. Please go to www.urconnecting.com and follow the steps!"
@@ -189,7 +195,7 @@ class SmsController < ApplicationController
 
     def send_help(phone_number)
       puts 'we will be sending help'
-      message = "#talk = Find Partner, #next = Find New Partner, #off = Sign Out, #how = This Message"
+      message = "#talk = Find Partner, #next = Find New Partner, #off = Sign Out, #options = This Message"
       send_message(phone_number, message)
       puts 'help sent'
     end  

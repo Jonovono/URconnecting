@@ -202,6 +202,14 @@ class User < ActiveRecord::Base
     puts self.status
     active? ||  status.include?("phone")
   end
+  
+  def good_to_go?
+    check_confirmations && facebook?
+  end
+  
+  def facebook?
+    !self.provider.nil?
+  end
     
   
   def gender?

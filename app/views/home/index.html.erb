@@ -1,3 +1,13 @@
+<% if current_user %>
+  <% if !current_user.good_to_go? %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h4>Not Done Registration</h4>
+  Uh uh. To complete registration, you need to add your phone number and sign in with Facebook.
+  <h3><%= link_to 'Click Here to Complete Registration and start texting!', user_steps_path %></h3>
+</div>
+  <% end %>
+<% end %>
 <div class='span8 offset3'>
 <input type="button"
   onclick="sendRequestViaMultiFriendSelector(); return false;"

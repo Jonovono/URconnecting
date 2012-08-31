@@ -7,6 +7,7 @@ class UserStepsController < ApplicationController
      puts 'wickedddd'
      puts User.count
      puts params
+     puts params[:user_id]
      @user = current_user
      puts @user
      render_wizard
