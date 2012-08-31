@@ -14,6 +14,8 @@ require "bundler/capistrano"
 set :application, "URconnecting"
 set :user, "jordan"
 
+load 'deploy/assets'
+
 # set :deploy_to, "/var/www/#{application}"
 set :deploy_to, "/home/#{user}/#{application}"
 set :deploy_via, :copy
