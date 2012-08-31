@@ -101,6 +101,8 @@ class SmsController < ApplicationController
       $redis.SET(num1, num2)
       $redis.SET(num2, num1)
       
+      Convesation.start_conversation(num1, num2)
+      
       $redis.SADD("talking", num1)
       $redis.SADD("talking", num2)
       
@@ -128,6 +130,8 @@ class SmsController < ApplicationController
       elsif ($redis.SISMEMBER("talking", phone_number) == 1)
         peer = $redis.GET(phone_number)
         $redis.DEL(phone_number)
+        
+        Conversation.end_convo(phone_number)
         
         if peer
           $redis.SREM('talking', peer)
@@ -188,6 +192,7 @@ class SmsController < ApplicationController
           send_message(phone_number, message)
           add_to_waiting(phone_number)
         end
+        Message.add_message(phone_number, message)
         message = "Partner: #{msg}"
         send_message(peer, message)
       end

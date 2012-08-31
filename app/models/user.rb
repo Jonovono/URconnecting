@@ -166,6 +166,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def current_convo?
+    self.conversations.where(:status => 1)[0]
+  end
+  
   def inactive?
     puts 'checking if the user is currently inactive'
     up = UserPlaying.where("user_id = ? and (status = ? or status = ?)", self.id, 1, 2)
