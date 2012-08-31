@@ -38,6 +38,10 @@ role :db,  "173.255.243.98"
 
 # Passenger
 
+after 'deploy:update_code' do
+  run "cd #/home/#{user}/#{application}; RAILS_ENV=production rake assets:precompile"
+end
+
 namespace :deploy do
  task :start do ; end
  task :stop do ; end
