@@ -64,9 +64,12 @@ class User < ActiveRecord::Base
     user.password_confirmation = 'password'
     user.email = email
     user.phone = phone
-    user.phone_confirm = '11111'
-    user.user_entered_confirmation = '11111'
-    user.save!
+    if user.save!
+      puts 'well it saved'
+      puts user.phone_confirm
+      user.user_entered_confirmation = user.phone_confirm
+      user.save!
+    end
   end
     
   
