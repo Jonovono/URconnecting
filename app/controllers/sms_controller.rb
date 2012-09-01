@@ -195,7 +195,7 @@ class SmsController < ApplicationController
           send_message(phone_number, message)
           add_to_waiting(phone_number)
         end
-        Message.add_message(phone_number, message)
+        Message.add_message(phone_number, msg)
         message = "Partner: #{msg}"
         send_message(peer, message)
       end
@@ -225,12 +225,29 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
+      if message.length > 155
+        puts 'this message must be broken down into small pieces. Fucking twilio'
+        chunks = message.scan(/.{150}/)
+        num = chunks.count
+        count = 1
+        chunks.each do |chunk|
+          message = chunk.insert(0, "(#{count/num}) ")
+          num += 1
+          $sms.account.sms.messages.create(
+            :from => '+14509000103',
+            :to => number,
+            :body => message
+          )
+        end
+      else
+            
       puts "Sending a message to #{number}"
       $sms.account.sms.messages.create(
         :from => '+14509000103',
         :to => number,
         :body => message
       )
+    end
       # response = $sms.send_message({
       #   from: '16477252253',
       #     to: number,
