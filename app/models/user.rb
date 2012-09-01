@@ -55,6 +55,21 @@ class User < ActiveRecord::Base
   MALE = 0
   FEMALE = 1
   
+  def self.fake_user(phone, email)
+    user = User.new
+    puts 'making a user from the console'
+    user.status = 'active'
+    user.provider = 'facebook'
+    user.password = 'password'
+    user.password_confirmation = 'password'
+    user.email = email
+    user.phone = phone
+    user.phone_confirm = '11111'
+    user.user_entered_confirmation = '11111'
+    user.save!
+  end
+    
+  
   
   def self.from_omniauth(auth, current_us)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
