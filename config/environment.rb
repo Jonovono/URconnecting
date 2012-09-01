@@ -7,9 +7,9 @@ Urdating::Application.initialize!
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.gmail.com',
-    :domain         => 'gmail.com',
+    :domain         => 'urconnecting.com',
     :port           => 587,
-    :user_name      => 'jordan123@gmail.com',
+    :user_name      => 'contact@urconnecting.com',
     :password       => 'staller123',
     :authentication => :plain
 }
