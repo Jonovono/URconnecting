@@ -229,8 +229,10 @@ class SmsController < ApplicationController
         puts 'this message must be broken down into small pieces. Fucking twilio'
         chunks = message.scan(/.{150}/)
         num = chunks.count
+        puts "the number is: #{num}"
         count = 1
         chunks.each do |chunk|
+          puts 'sending a chunk'
           mess = chunk.insert(0, "(#{count}/#{num}) ")
           num += 1
           $sms.account.sms.messages.create(
