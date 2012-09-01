@@ -39,8 +39,8 @@ class Conversation < ActiveRecord::Base
     us1 = User.find_by_phone(num1)
     us2 = User.find_by_phone(num2)
     
-    up1 = UserPlaying.create!(:user_id => us1.id, :conversation_id => c.id, :status => 2)
-    up2 = UserPlaying.create!(:user_id => us2.id, :conversation_id => c.id, :status => 2)
+    up1 = UserPlaying.create!(:user_id => us1.id, :conversation_id => c.id)
+    up2 = UserPlaying.create!(:user_id => us2.id, :conversation_id => c.id)
   end
   
   # def active?
