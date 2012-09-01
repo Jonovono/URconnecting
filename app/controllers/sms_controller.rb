@@ -23,7 +23,7 @@ class SmsController < ApplicationController
         get_intent(message, phone_number, @user)
       else
         puts 'the user does exist in our database but appears to not hove completed registration.'
-        message = "Hey there! We see you have started registering but it looks like you have not finished. You should log in with FB to complete. If you are having problems email contact@urconnecting.com. Thanks!"
+        message = "Hi! You have not completed registration. You should log in with FB to complete. If you are having problems email contact@urconnecting.com. Thanks!"
         send_message(phone_number, message)
       end
     else
@@ -101,7 +101,7 @@ class SmsController < ApplicationController
       $redis.SET(num1, num2)
       $redis.SET(num2, num1)
       
-      Convesation.start_conversation(num1, num2)
+      Conversation.start_conversation(num1, num2)
       
       $redis.SADD("talking", num1)
       $redis.SADD("talking", num2)
