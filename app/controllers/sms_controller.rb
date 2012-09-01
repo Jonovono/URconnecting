@@ -154,11 +154,11 @@ class SmsController < ApplicationController
         
     def stop_chat(phone_number)
       if ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
-        message = 'You are already signed out. If you want to start talking respond with #start'
+        message = 'You are already signed out. If you want to start talking respond with #talk'
         send_message(phone_number, message)
       elsif $redis.SISMEMBER("waiting", phone_number) == 1
         $redis.SREM('waiting', phone_number)
-        message = 'You have been removed from the waiting list and wont be paired up to talk to anyone. Whenever you want to talk again send #start to this number'
+        message = 'You have been removed from the waiting list and wont be paired up to talk to anyone. Whenever you want to talk again send #talk to this number'
         send_message(phone_number, message)
       elsif $redis.SISMEMBER("talking", phone_number) == 1
         $redis.SREM('talking', phone_number)
@@ -174,14 +174,14 @@ class SmsController < ApplicationController
           send_message(peer, message)
           add_to_waiting(peer)
         end
-        message = 'You have disconnected. You will not receive any messages. When you want to talk again message #start to this number'
+        message = 'You have disconnected. You will not receive any messages. When you want to talk again message #talk to this number'
         send_message(phone_number, message)
       end
     end
     
     def msg(phone_number, msg)
       if ($redis.SISMEMBER("waiting", phone_number) == 0 && $redis.SISMEMBER("talking", phone_number) == 0)
-        message = 'You are signed out. If you want to find someone to talk with respond with #start'
+        message = 'You are signed out. If you want to find someone to talk with respond with #talk'
         send_message(phone_number, message)
       elsif $redis.SISMEMBER("waiting", phone_number) == 1
         $redis.SREM('waiting', phone_number)
@@ -225,21 +225,21 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
-      if message.length > 155
-        puts 'this message must be broken down into small pieces. Fucking twilio'
-        chunks = message.scan(/.{150}/)
-        num = chunks.count
-        count = 1
-        chunks.each do |chunk|
-          message = chunk.insert(0, "(#{count/num}) ")
-          num += 1
-          $sms.account.sms.messages.create(
-            :from => '+14509000103',
-            :to => number,
-            :body => message
-          )
-        end
-      else
+      # if message.length > 155
+      #   puts 'this message must be broken down into small pieces. Fucking twilio'
+      #   chunks = message.scan(/.{150}/)
+      #   num = chunks.count
+      #   count = 1
+      #   chunks.each do |chunk|
+      #     message = chunk.insert(0, "(#{count/num}) ")
+      #     num += 1
+      #     $sms.account.sms.messages.create(
+      #       :from => '+14509000103',
+      #       :to => number,
+      #       :body => message
+      #     )
+      #   end
+      # else
             
       puts "Sending a message to #{number}"
       $sms.account.sms.messages.create(
@@ -247,7 +247,7 @@ class SmsController < ApplicationController
         :to => number,
         :body => message
       )
-    end
+    # end
       # response = $sms.send_message({
       #   from: '16477252253',
       #     to: number,
