@@ -45,8 +45,8 @@
             <ul class="nav pull-right">
               <li><%= link_to "Home",    '/' %></li>
               <li><%= link_to "About/Contact",    '/about' %></li>
+              <li><%= link_to "How to Use", home_how_path %></li>
               <% if user_signed_in? %>
-                <li><%= link_to "How to Use", home_how_path %></li>
                 <li><%= link_to "Add Info", profile_path %></li>
                 <li><%= link_to "Sign Out",destroy_user_session_path, :method => :delete %></li>
               <% else %>
@@ -66,7 +66,7 @@
             <div class="pull-left">
               URconnecting.com
             </div>
-            <div class='span5 offset6'>
+            <div class='span5 offset3'>
               <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tunesicles.com" data-text="oaeu" data-lang="en" data-hashtags="twbmtye">Tweet</a>
             <span class='st_sharethis_hcount' displayText='ShareThis'></span>
             <span class='st_twitter_hcount' displayText='Tweet'></span>
@@ -81,8 +81,8 @@
 
             <div class="pull-right">
               <a href="/about">About/Contact</a> | 
-              <a href="/terms">Terms</a> | 
-              <a href="/privacy">Privacy</a> |
+              <!-- <a href="/terms">Terms</a> | 
+              <a href="/privacy">Privacy</a> | -->
             </div>
           </div>
         </div>

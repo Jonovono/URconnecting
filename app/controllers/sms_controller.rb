@@ -164,6 +164,9 @@ class SmsController < ApplicationController
         $redis.SREM('talking', phone_number)
         peer = $redis.GET(phone_number)
         $redis.DEL(phone_number)
+        
+        Conversation.end_convo(phone_number)
+        
         if peer
           $redis.SREM('talking', peer)
           $redis.DEL(peer)

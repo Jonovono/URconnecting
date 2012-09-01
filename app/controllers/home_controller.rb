@@ -54,7 +54,7 @@ class HomeController < ApplicationController
     @user = current_user
     puts current_user
         
-    message = "Hello. Thanks for registering on **. Your confirmation code is #{@user.phone_confirm}. Please enter it on that same page and click submit!"
+    message = "Hello! Welcome and thanks for registering for URconnecting.com. Your confirmation code is #{@user.phone_confirm}. Please enter it on that same page and click submit!"
     
     # response = $sms.send_message({
     #   from: '16477252253',
