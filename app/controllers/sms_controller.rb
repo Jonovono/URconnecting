@@ -225,9 +225,12 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
+      puts 'the message is'
+      puts message
       if message.length > 155
         puts 'this message must be broken down into small pieces. Fucking twilio'
         chunks = message.scan(/.{150}/)
+        puts chunks
         num = chunks.count
         puts "the number is: #{num}"
         count = 1
