@@ -225,21 +225,21 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
-      # if message.length > 155
-      #   puts 'this message must be broken down into small pieces. Fucking twilio'
-      #   chunks = message.scan(/.{150}/)
-      #   num = chunks.count
-      #   count = 1
-      #   chunks.each do |chunk|
-      #     message = chunk.insert(0, "(#{count/num}) ")
-      #     num += 1
-      #     $sms.account.sms.messages.create(
-      #       :from => '+14509000103',
-      #       :to => number,
-      #       :body => message
-      #     )
-      #   end
-      # else
+      if message.length > 155
+        puts 'this message must be broken down into small pieces. Fucking twilio'
+        chunks = message.scan(/.{150}/)
+        num = chunks.count
+        count = 1
+        chunks.each do |chunk|
+          mess = chunk.insert(0, "(#{count}/#{num}) ")
+          num += 1
+          $sms.account.sms.messages.create(
+            :from => '+14509000103',
+            :to => number,
+            :body => mess
+          )
+        end
+      else
             
       puts "Sending a message to #{number}"
       $sms.account.sms.messages.create(
@@ -247,7 +247,7 @@ class SmsController < ApplicationController
         :to => number,
         :body => message
       )
-    # end
+    end
       # response = $sms.send_message({
       #   from: '16477252253',
       #     to: number,
