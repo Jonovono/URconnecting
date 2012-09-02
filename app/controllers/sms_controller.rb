@@ -1,4 +1,11 @@
 class SmsController < ApplicationController
+  
+  def phone_call
+    response = Twilio::TwiML::Response.new do |r|
+      r.Say 'Hey there. Please go to you are connecting dot com for more information.', :voice => 'woman'
+    end 
+   end
+  
   def index
     puts 'Incoming text message received'
     info = params

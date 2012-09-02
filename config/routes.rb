@@ -27,6 +27,8 @@ Urdating::Application.routes.draw do
   match '/incoming' => 'sms#index'
   match '/sms' => 'sms#index', :via => [:get, :post]
   match '/twilio' => 'sms#index', :via => [:post]
+  match '/phone_call' => 'sms#phone_call', :via => [:post]
+  
 
 
   devise_for :users, :controllers => {:registrations => 'users/registrations', :confirmations => 'users/confirmations'}
