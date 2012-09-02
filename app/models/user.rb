@@ -34,9 +34,9 @@ class User < ActiveRecord::Base
                   :provider, :relationship_status
   
   validates :email, :uniqueness => true, :if => :active?
-  # validates :email, :format => {:with => /^.+@uregina.ca+$/, 
-  #                   :message => "We only accept University of Regina Email Adresses. If you are not a
-  #                                 UofR student we do not allow access to you."}
+  validates :email, :format => {:with => /^.+@uregina.ca+$/, 
+                    :message => "We only accept University of Regina Email Adresses. If you are not a
+                                  UofR student we do not allow access to you."}
   validates :phone, :uniqueness => true, :if => :active?
   validates :phone, :presence => true, :if => :active?
   validates :phone, :format => {:with => /^[\(\)0-9\- \+\.]{10,20}$/,
