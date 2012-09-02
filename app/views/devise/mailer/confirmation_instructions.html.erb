@@ -1,10 +1,8 @@
-<p>Welcome to URconnecting.com, <%= @resource.email %>!</p>
+<h1>Welcome to URconnecting.com</h1>
+<p>URconnecting matches you to a random University of Regina student and lets you text them</p> 
 
 <p>You can confirm your account email through the link below:</p>
 
-<% puts 'tetetet' %>
-<% puts @resource %>
-<% puts @resource.valid? %>
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token, :user_id => @resource.id) %></p>
 
 <p>You will be asked to enter your phone number. Do not worry though. No one else will ever see it. When you send a text it is sent to our phone number which just redirects the message to the phone we have paired you with.</p>
