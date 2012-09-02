@@ -69,4 +69,10 @@ class HomeController < ApplicationController
     )
     render :nothing => true
   end
+  
+  def updating
+    puts 'updating for old user'
+    puts params
+    @user = User.find_by_email("me@jonovono.com")
+  end
 end

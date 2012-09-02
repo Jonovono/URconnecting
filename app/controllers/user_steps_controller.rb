@@ -1,7 +1,8 @@
 class UserStepsController < ApplicationController
    include Wicked::Wizard
    
-   steps :phone, :info
+   # steps :phone, :info
+   steps :phone
    
    def show
      puts 'wickedddd'

@@ -5,6 +5,7 @@ Urdating::Application.routes.draw do
   resources :profile
   match 'home/phone' => 'home#phone', :as => 'profile_phone'
   match '/phone_update' => 'home#phone_update', :via => [:put]
+  match '/old_update' => 'profile#old_update', :via => [:put]
 
   resources :authentications
 
@@ -18,6 +19,8 @@ Urdating::Application.routes.draw do
 
   get "home/contact"
   get "home/confirmation"
+  
+  match  '/updating' => 'profile#updating'
 
   # devise_for :users
   

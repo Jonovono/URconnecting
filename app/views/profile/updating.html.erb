@@ -4,7 +4,7 @@
 <div class='row'>
   <div class='span6 offset3'>
     <h5>You must have a University of Regina email account!</h5>
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= simple_form_for @user, :url => '/old_update' do |f| %>
     <!-- # <%= devise_error_messages! %> -->
     <%= render 'shared/error_messages' %>
     

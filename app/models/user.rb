@@ -34,16 +34,16 @@ class User < ActiveRecord::Base
                   :provider, :relationship_status
   
   validates :email, :uniqueness => true, :if => :active?
-  validates :email, :format => {:with => /^.+@uregina.ca+$/, 
-                    :message => "We only accept University of Regina Email Adresses. If you are not a
-                                  UofR student we do not allow access to you."}
+  # validates :email, :format => {:with => /^.+@uregina.ca+$/, 
+  #                   :message => "We only accept University of Regina Email Adresses. If you are not a
+  #                                 UofR student we do not allow access to you."}
   validates :phone, :uniqueness => true, :if => :active?
   validates :phone, :presence => true, :if => :active?
   validates :phone, :format => {:with => /^[\(\)0-9\- \+\.]{10,20}$/,
                                 :message => "You must enter an area code."}, :if => :active?
                                 
-  # validates :gender, :presence => true
-  # validates :year_born, :presence => true
+  validates :gender, :presence => true
+  validates :year_born, :presence => true
   
   UNDERGRAD = 0
   MASTER = 1
@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
       user.user_entered_confirmation = user.phone_confirm
       user.save!
     end
+  end
+  
+  def age_from_year?
+    2012 - self.year_born
   end
     
   
@@ -160,16 +164,15 @@ class User < ActiveRecord::Base
     now.year - self.birthdate.year - (self.birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
   end
     
-  
   def user_info
     message = "You just connected with a new partner. ("
     message << "#{self.gender?}, " if !self.gender.blank?
-    message << "age: #{self.age}, " if !self.birthdate.blank?
-    message << "#{self.university_year.ordinalize}, " if !self.university_year.blank?
-    message << "studying: #{self.studying.chomp(' ')}" if !self.studying.blank?
-    message << "occupation: #{self.occupation?}" if !self.occupation.blank?
-    message << ") "
-    message << "Say something to get started!"
+    message << "age: #{self.age_from_year?}, " if !self.year_born.blank?
+    message << "#{self.university_year.ordinalize} year, " if !self.university_year.blank?
+    message << "studying: #{self.studying.chomp(' ')}, " if !self.studying.blank?
+    message << "#{self.occupation?}" if !self.occupation.blank?
+    message << ")"
+    message << ". Say something to get started!"
     message
     # "(#{self.gender?}, age: #{self.age}, studying: #{self.studying.chomp(' ')})"
   end
@@ -226,7 +229,7 @@ class User < ActiveRecord::Base
   end
   
   def good_to_go?
-    check_confirmations && facebook?
+    check_confirmations
   end
   
   def facebook?

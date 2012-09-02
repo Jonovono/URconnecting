@@ -30,7 +30,7 @@ class SmsController < ApplicationController
         get_intent(message, phone_number, @user)
       else
         puts 'the user does exist in our database but appears to not hove completed registration.'
-        message = "Hi! You have not completed registration. You should log in with FB to complete. If you are having problems email contact@urconnecting.com. Thanks!"
+        message = "Hi! You have not completed registration. Need to validate your phone! If you are having problems email contact@urconnecting.com. Thanks!"
         send_message(phone_number, message)
       end
     else
