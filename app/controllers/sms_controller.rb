@@ -11,15 +11,15 @@ class SmsController < ApplicationController
     info = params
     
     # For nexma response
-    # phone_number = info['msisdn']
-    # message_id = info['messageId']
-    # message = info['text']
-    # time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
+    phone_number = info['msisdn']
+     message_id = info['messageId']
+     message = info['text']
+     time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
     
     # Parse twilio response
-    phone_number = info["From"]
-    message = info["Body"]
-    message_id = info["SmsMessageSid"]
+    # phone_number = info["From"]
+    # message = info["Body"]
+    # message_id = info["SmsMessageSid"]
     
     check_phone_length!(phone_number)
         
