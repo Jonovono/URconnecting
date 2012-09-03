@@ -239,34 +239,46 @@ class SmsController < ApplicationController
     # Sends a message to specified message
     def send_message(number, message)
       puts "sending message to #{number}"
-    #   puts 'the message is'
-    #   puts message
-    #   if message.length > 155
-    #     puts 'this message must be broken down into small pieces. Fucking twilio'
-    #     chunks = message.scan(/.{150}/)
-    #     puts chunks
-    #     num = chunks.count
-    #     puts "the number is: #{num}"
-    #     count = 1
-    #     chunks.each do |chunk|
-    #       puts 'sending a chunk'
-    #       mess = chunk.insert(0, "(#{count}/#{num}) ")
-    #       count += 1
-    #       $sms.account.sms.messages.create(
-    #         :from => '+14509000103',
-    #         :to => number,
-    #         :body => mess
-    #       )
-    #     end
-    #   else
-    #         
-    #   puts "Sending a message to #{number}"
-    #   $sms.account.sms.messages.create(
-    #     :from => '+14509000103',
-    #     :to => number,
-    #     :body => message
-    #   )
-    # end
+      puts 'the message is'
+      puts message
+      if message.length > 155
+        puts 'this message must be broken down into small pieces. Fucking twilio'
+        chunks = message.scan(/.{150}/)
+        puts chunks
+        num = chunks.count
+        puts "the number is: #{num}"
+        count = 1
+        chunks.each do |chunk|
+          puts 'sending a chunk'
+          mess = chunk.insert(0, "(#{count}/#{num}) ")
+          count += 1
+          params = {'src' => '13069881525', 
+                     'dst' => number, 
+                     'text' => mess,
+                     'type' => 'sms',
+                  }
+          response = $sms.send_message(params)
+          # $sms.account.sms.messages.create(
+          #   :from => '+14509000103',
+          #   :to => number,
+          #   :body => mess
+          # )
+        end
+      else
+            
+      puts "Sending a message to #{number}"
+      params = {'src' => '13069881525', 
+                 'dst' => number, 
+                 'text' => message,
+                 'type' => 'sms',
+              }
+      response = $sms.send_message(params)
+      # $sms.account.sms.messages.create(
+      #   :from => '+14509000103',
+      #   :to => number,
+      #   :body => message
+      # )
+    end
     
     # Nexmo stuff
       # response = $sms.send_message({
@@ -282,12 +294,12 @@ class SmsController < ApplicationController
       # end
       
       # Pilvio stuff
-      params = {'src' => '13069881525', 
-                 'dst' => number, 
-                 'text' => message,
-                 'type' => 'sms',
-              }
-      response = $sms.send_message(params)
+      # params = {'src' => '13069881525', 
+      #            'dst' => number, 
+      #            'text' => message,
+      #            'type' => 'sms',
+      #         }
+      # response = $sms.send_message(params)
     end
     
     def unknown_message(phone_number)

@@ -61,20 +61,34 @@ class HomeController < ApplicationController
     #     to: @phone,
     #   text: message
     # })
+
+    params = {'src' => '13069881525', 
+               'dst' => @phone, 
+               'text' => message,
+               'type' => 'sms',
+            }
+    response = $sms.send_message(params)
     
-    $sms.account.sms.messages.create(
-      :from => '+14509000103',
-      :to => @phone,
-      :body => message
-    )
+    # $sms.account.sms.messages.create(
+    #   :from => '+14509000103',
+    #   :to => @phone,
+    #   :body => message
+    # )
     
     message = "How this works: #talk = Find Partner, #next = Find New Partner, #off = Sign Out, #options = This Message"
+
+    params = {'src' => '13069881525', 
+               'dst' => @phone, 
+               'text' => message,
+               'type' => 'sms',
+            }
+    response = $sms.send_message(params)
     
-    $sms.account.sms.messages.create(
-      :from => '+14509000103',
-      :to => @phone,
-      :body => message
-    )
+    # $sms.account.sms.messages.create(
+    #   :from => '+14509000103',
+    #   :to => @phone,
+    #   :body => message
+    # )
     
     render :nothing => true
   end

@@ -16,3 +16,11 @@ params = {'src' => '13069881525',
         }
 response = p.send_message(params)
 
+params = {'to' => '13065377760', 
+           'from' => '13069881525', 
+           'answer_url' => 'http://example.com/AnswerUrl',
+           'answer_method' => 'GET',
+           'hangup_url' => 'http://example.com/HangupUrl'
+        }
+        
+response = $sms.make_call(params)
