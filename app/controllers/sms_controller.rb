@@ -8,6 +8,7 @@ class SmsController < ApplicationController
   
   def index
     puts 'Incoming text message received'
+    puts params
     info = params
     
     # For nexma response

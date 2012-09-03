@@ -12,6 +12,7 @@ gem 'redis'
 gem 'twilio-ruby'
 gem "twitter-bootstrap-rails", :group => :assets
 gem 'rails_admin'
+gem 'plivo'
 
 
 # Bundle edge Rails instead:

@@ -11,7 +11,7 @@ p = RestAPI.new(AUTH_ID, AUTH_TOKEN)
 # Send SMS
 params = {'src' => '13069881525', 
            'dst' => '13065377760', 
-           'text' => 'Hi, message from Plivo this is pretty cool oh wow oh yeah awesome I love this so much I hope it gets used so much can we get everyone in the world using this please that would be greattt!',
+           'text' => 'Hi, message from Plivo this is pretty cool ',
            'type' => 'sms',
         }
 response = p.send_message(params)

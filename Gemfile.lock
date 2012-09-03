@@ -101,6 +101,10 @@ GEM
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
     pg (0.14.0)
+    plivo (0.2.12)
+      builder (>= 2.1.2)
+      json (>= 1.6.6)
+      rest-client (>= 1.6.7)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -145,6 +149,8 @@ GEM
       json (~> 1.4)
     redis (3.0.1)
     remotipart (1.0.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -194,6 +200,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg
+  plivo
   rails (= 3.2.7)
   rails_admin
   redis
