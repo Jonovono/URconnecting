@@ -226,8 +226,8 @@ class SmsController < ApplicationController
           add_to_waiting(phone_number)
         end
         Message.add_message(phone_number, msg)
-        message = "Partner: #{msg}"
-        send_message(peer, message)
+        # message = "Partner: #{msg}"
+        send_message(peer, msg)
       end
     end
 
@@ -258,7 +258,7 @@ class SmsController < ApplicationController
       puts "sending message to #{number}"
       puts 'the message is'
       puts message
-      if message.length > 155
+      if message.length > 160
         puts 'this message must be broken down into small pieces. Fucking twilio'
         chunks = message.scan(/.{150}/)
         puts chunks
