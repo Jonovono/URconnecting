@@ -287,7 +287,7 @@ class SmsController < ApplicationController
                  'text' => message,
                  'type' => 'sms',
               }
-      response = p.send_message(params)
+      response = $sms.send_message(params)
     end
     
     def unknown_message(phone_number)
