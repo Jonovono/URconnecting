@@ -1,7 +1,9 @@
 Urdating::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
-  config.assets.precompile += %w( *.css *.js )
+  # config.assets.precompile += %w( *.css *.js )
+  config.assets.precompile += %w(rails_admin/rails_admin.css rails_admin/rails_admin.js)
+  
 
   # Code is not reloaded between requests
   config.cache_classes = true
