@@ -232,45 +232,46 @@ class SmsController < ApplicationController
     
     # Sends a message to specified message
     def send_message(number, message)
-      puts 'the message is'
-      puts message
-      if message.length > 155
-        puts 'this message must be broken down into small pieces. Fucking twilio'
-        chunks = message.scan(/.{150}/)
-        puts chunks
-        num = chunks.count
-        puts "the number is: #{num}"
-        count = 1
-        chunks.each do |chunk|
-          puts 'sending a chunk'
-          mess = chunk.insert(0, "(#{count}/#{num}) ")
-          count += 1
-          $sms.account.sms.messages.create(
-            :from => '+14509000103',
-            :to => number,
-            :body => mess
-          )
-        end
-      else
-            
-      puts "Sending a message to #{number}"
-      $sms.account.sms.messages.create(
-        :from => '+14509000103',
-        :to => number,
-        :body => message
-      )
-    end
-      # response = $sms.send_message({
-      #   from: '16477252253',
-      #     to: number,
-      #   text: message
-      # })
-      # 
-      # if response.success?
-      #   puts "Sent message #{response.message_id}"
-      # elsif response.failure?
-      #   raise response.error
-      # end
+      puts "sending message to #{number}"
+    #   puts 'the message is'
+    #   puts message
+    #   if message.length > 155
+    #     puts 'this message must be broken down into small pieces. Fucking twilio'
+    #     chunks = message.scan(/.{150}/)
+    #     puts chunks
+    #     num = chunks.count
+    #     puts "the number is: #{num}"
+    #     count = 1
+    #     chunks.each do |chunk|
+    #       puts 'sending a chunk'
+    #       mess = chunk.insert(0, "(#{count}/#{num}) ")
+    #       count += 1
+    #       $sms.account.sms.messages.create(
+    #         :from => '+14509000103',
+    #         :to => number,
+    #         :body => mess
+    #       )
+    #     end
+    #   else
+    #         
+    #   puts "Sending a message to #{number}"
+    #   $sms.account.sms.messages.create(
+    #     :from => '+14509000103',
+    #     :to => number,
+    #     :body => message
+    #   )
+    # end
+      response = $sms.send_message({
+        from: '16477252253',
+          to: number,
+        text: message
+      })
+      
+      if response.success?
+        puts "Sent message #{response.message_id}"
+      elsif response.failure?
+        raise response.error
+      end
     end
     
     def unknown_message(phone_number)
