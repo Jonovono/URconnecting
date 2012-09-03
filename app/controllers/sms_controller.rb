@@ -12,10 +12,15 @@ class SmsController < ApplicationController
     info = params
     
     # For nexma response
-    phone_number = info['msisdn']
-     message_id = info['messageId']
-     message = info['text']
-     time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
+    # phone_number = info['msisdn']
+    #  message_id = info['messageId']
+    #  message = info['text']
+    #  time = DateTime.parse(info['message-timestamp'])    # 2012-08-28 04:45:58
+     
+     # For Pilvio response
+     phone_number = info['From']
+    message_id = info['MessageUUID']
+    message = info['Text']
     
     # Parse twilio response
     # phone_number = info["From"]
@@ -262,17 +267,27 @@ class SmsController < ApplicationController
     #     :body => message
     #   )
     # end
-      response = $sms.send_message({
-        from: '16477252253',
-          to: number,
-        text: message
-      })
+    
+    # Nexmo stuff
+      # response = $sms.send_message({
+      #   from: '16477252253',
+      #     to: number,
+      #   text: message
+      # })
+      # 
+      # if response.success?
+      #   puts "Sent message #{response.message_id}"
+      # elsif response.failure?
+      #   raise response.error
+      # end
       
-      if response.success?
-        puts "Sent message #{response.message_id}"
-      elsif response.failure?
-        raise response.error
-      end
+      # Pilvio stuff
+      params = {'src' => '13069881525', 
+                 'dst' => number, 
+                 'text' => message,
+                 'type' => 'sms',
+              }
+      response = p.send_message(params)
     end
     
     def unknown_message(phone_number)
