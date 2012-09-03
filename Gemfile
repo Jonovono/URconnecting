@@ -11,7 +11,7 @@ gem 'pg'
 gem 'redis'
 gem 'twilio-ruby'
 gem "twitter-bootstrap-rails", :group => :assets
-# gem 'rails_admin'
+gem 'rails_admin'
 
 
 # Bundle edge Rails instead:

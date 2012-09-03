@@ -1,5 +1,7 @@
 Urdating::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   get "sms/index"
 
   resources :profile
