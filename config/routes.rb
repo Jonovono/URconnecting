@@ -33,6 +33,7 @@ Urdating::Application.routes.draw do
   match '/sms' => 'sms#index', :via => [:get, :post]
   match '/twilio' => 'sms#index', :via => [:post]
   match '/phone_call' => 'sms#phone_call', :via => [:post]
+  match '/old_twilio' => 'sms#old_twilio'
   
 
 

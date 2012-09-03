@@ -6,6 +6,23 @@ class SmsController < ApplicationController
     end 
    end
   
+  def old_twilio
+    puts 'someone texted the twilio number'
+    puts params
+    info = params
+     message = 'URconnecting changed numbers. Sorry. Please add 1-306-988-1525 (this number) as the new number for the site. Everything else is the same'
+     # For Pilvio response
+     phone_number = info['From']
+    message_id = info['MessageUUID']
+    params = {'src' => '13069881525', 
+               'dst' => phone_number, 
+               'text' => message,
+               'type' => 'sms',
+            }
+    response = $sms.send_message(params)
+  end
+    
+  
   def index
     puts 'Incoming text message received'
     puts params
