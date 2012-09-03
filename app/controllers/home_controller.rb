@@ -67,6 +67,15 @@ class HomeController < ApplicationController
       :to => @phone,
       :body => message
     )
+    
+    message = "How this works: #talk = Find Partner, #next = Find New Partner, #off = Sign Out, #options = This Message"
+    
+    $sms.account.sms.messages.create(
+      :from => '+14509000103',
+      :to => @phone,
+      :body => message
+    )
+    
     render :nothing => true
   end
   
