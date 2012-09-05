@@ -8,7 +8,7 @@ RailsAdmin.config do |config|
   # I18n.default_locale = :de
   
   config.authorize_with do
-    redirect_to root_path unless current_user == User.find(28)
+    redirect_to root_path unless current_user == User.find_by_email('howletjo@uregina.ca')
   end
 
   config.current_user_method { current_user } # auto-generated
