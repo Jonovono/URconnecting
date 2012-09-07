@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   # validate :only_one_waiting_conversation
   
   before_create :add_phone_validator
+  before_save :add_phone_redis, :if => :active_or_info?
   # before_validation :set_default_password
   
   validate :check_confirmations, :if => :active_or_info?
@@ -34,9 +35,9 @@ class User < ActiveRecord::Base
                   :provider, :relationship_status
   
   validates :email, :uniqueness => true, :if => :active?
-  validates :email, :format => {:with => /^.+@uregina.ca+$/, 
-                    :message => "We only accept University of Regina Email Adresses. If you are not a
-                                  UofR student we do not allow access to you."}
+  # validates :email, :format => {:with => /^.+@uregina.ca+$/, 
+  #                   :message => "We only accept University of Regina Email Adresses. If you are not a
+  #                                 UofR student we do not allow access to you."}
   validates :phone, :uniqueness => true, :if => :active?
   validates :phone, :presence => true, :if => :active?
   validates :phone, :format => {:with => /^[\(\)0-9\- \+\.]{10,20}$/,
@@ -75,9 +76,12 @@ class User < ActiveRecord::Base
   def age_from_year?
     2012 - self.year_born
   end
+  
+  def add_phone_redis
+    puts 'is it not adding the phone number'
+    $redis.SADD("registered", self.phone)
+  end
     
-  
-  
   def self.from_omniauth(auth, current_us)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       puts 'omnininini'
